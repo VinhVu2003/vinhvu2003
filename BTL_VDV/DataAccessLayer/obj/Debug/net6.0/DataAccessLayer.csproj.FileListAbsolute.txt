@@ -1,0 +1,15 @@
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.deps.json
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\bin\Debug\net6.0\DataAccessLayer.pdb
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\bin\Debug\net6.0\DataModel.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\bin\Debug\net6.0\DataModel.pdb
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.AssemblyReference.cache
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfoInputs.cache
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.AssemblyInfo.cs
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CoreCompileInputs.cache
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.csproj.CopyComplete
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\refint\DataAccessLayer.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\DataAccessLayer.pdb
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\DataAccessLayer\obj\Debug\net6.0\ref\DataAccessLayer.dll
