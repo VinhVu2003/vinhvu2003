@@ -11,6 +11,7 @@ namespace DataAccessLayer.Interfaces
     public partial interface IHoaDonBanRepository
 
     {
-        bool Create(DonHangBanModel model);
+        bool Create(HoaDonModel model);
+        bool Update(HoaDonModel model);
     }
 }

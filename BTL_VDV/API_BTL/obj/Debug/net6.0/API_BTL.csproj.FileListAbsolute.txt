@@ -46,3 +46,13 @@ D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_V
 D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\obj\Debug\net6.0\API_BTL.pdb
 D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\obj\Debug\net6.0\API_BTL.genruntimeconfig.cache
 D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\obj\Debug\net6.0\ref\API_BTL.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\JWT.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\System.Text.Json.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV\API_BTL\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

@@ -16,9 +16,13 @@ namespace BusinessLogicLayer
         {
             _res = res;
         }
-        public bool Create(DonHangBanModel model)
+        public bool Create(HoaDonModel model)
         {
             return _res.Create(model);
+        }
+        public bool Update(HoaDonModel model)
+        {
+            return _res.Update(model);
         }
     }
 }

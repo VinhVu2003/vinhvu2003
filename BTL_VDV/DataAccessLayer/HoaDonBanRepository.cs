@@ -17,7 +17,7 @@ namespace DataAccessLayer
             this._dbHelper = DatabaseHelper;
         }
 
-        public bool Create(DonHangBanModel model)
+        public bool Create(HoaDonModel model)
         {
             string msgError = "";
             try
@@ -26,11 +26,40 @@ namespace DataAccessLayer
                 "@TenKH", model.TenKH,
                 "@Diachi", model.DiaChi,
                 "@TrangThai", model.TrangThai,
-                "@list_json_chitiethoadon", model.list_json_ChiTietHDB != null ? MessageConvert.SerializeObject(model.list_json_ChiTietHDB) : null);
+                "@NgayTao", model.NgayTao,
+                "@SDT", model.SDT,
+                "@DiaChiGiaoHang", model.DiaChiGiaoHang,
+                "@list_json_chitiethoadon", model.list_json_ChiTietHD != null ? MessageConvert.SerializeObject(model.list_json_ChiTietHD) : null);
                 //if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 //{
                 //    throw new Exception(Convert.ToString(result) + msgError);
                 //}
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool Update(HoaDonModel model)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoa_don_update",
+                "@MaHoaDon", model.MaHoaDon,
+                "@TenKH", model.TenKH,
+                "@Diachi", model.DiaChi,
+                "@TrangThai", model.TrangThai,
+                "@NgayTao", model.NgayTao,
+                "@SDT", model.SDT,
+                "@DiaChiGiaoHang", model.DiaChiGiaoHang,
+                "@list_json_chitiethoadon", model.list_json_ChiTietHD != null ? MessageConvert.SerializeObject(model.list_json_ChiTietHD) : null);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
                 return true;
             }
             catch (Exception ex)

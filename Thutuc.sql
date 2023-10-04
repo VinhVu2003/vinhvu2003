@@ -1,71 +1,4 @@
-﻿create database BTL_API_BLBH
-go 
-use BTL_API_BLBH
-go
-
-create table LoaiSP(
-MaLoai int identity(1,1) primary key,
-TenLoai nvarchar(50) 
-)
-
-create table NhaCC(
-MaNCC int identity(1,1) primary key,
-TenNCC nvarchar(50),
-Diachi nvarchar(50),
-SDT char(10) check(SDT like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
-)
-
-create table KhachHang(
-MaKH int identity(1,1) primary key,
-TenKH nvarchar(50) ,
-DiaChi nvarchar(50),
-SDT char(10) 
-)
-
-create table SanPham(
-MaLoai int foreign key references LoaiSP(MaLoai) on delete cascade on update cascade,
-MaSP int identity(1,1) primary key,
-TenSP nvarchar(50),
-DVTinh nvarchar(50),
-SLTon int
-)
-
-create table HoaDonNhap(
-MaHDN int identity(1,1) primary key,
---MaNV int foreign key references NhanVien(MaNV) on delete cascade on update cascade,
-MaNCC int foreign key references NhaCC(MaNCC) on delete cascade on update cascade,
-NgayNhap datetime,
-GiaNhap float 
-)
-
-create table ChiTietHDN(
-ID int identity(1,1) primary key,
-MaHDN int references HoaDonNhap(MaHDN) on delete cascade,
-MaSP int references SanPham(MaSP) on delete cascade,
-SLNhap int check(SLNhap > 0),
-TongTien float check(TongTien > 0),
-)
-
-create table HoaDonBan(
-MaHDB int identity(1,1) primary key,
---MaNV int foreign key references NhanVien(MaNV) on delete cascade on update cascade,
-TenKH nvarchar(100),
-DiaChi nvarchar(100),
-NgayBan datetime,
-GiaBan float,
-TrangThai bit
-)
-select*from HoaDonBan
-alter table HoaDonBan add TenKH nvarchar(100)
-drop table HoaDonBan
-
-create table ChiTietHDB(
-ID int identity(1,1) primary key,
-MaHDB int references HoaDonBan(MaHDB) on delete cascade,
-MaSP int references SanPham(MaSP) on delete cascade,
-SLBan int check(SLBan > 0),
-TongTien float check(TongTien > 0),
-)
+﻿
 -----------------------------------------
 create proc KH_get_by_id
 @MaID nvarchar(30)
@@ -114,7 +47,8 @@ end
 create PROCEDURE [dbo].[sp_khach_search] (@page_index  INT, 
                                        @page_size   INT,
 									   @ten_khach Nvarchar(50),
-									   @dia_chi Nvarchar(250)
+									   @dia_chi Nvarchar(250),
+
 									   )
 AS
     BEGIN
@@ -161,43 +95,52 @@ AS
         END;
     END;
 
---{
---  "page": "1",
---  "pageSize": "1",
---  "ten_khach": "Vinh"
---  "dia_chi": "string"
---}
+{
+  "page": "1",
+  "pageSize": "1",
+  "ten_khach": "Vinh"
+  "dia_chi": "string"
+}
 -------------------------------------------------------
-select*from HoaDonBan
-select*from ChiTietHDB
+select*from HoaDons
+select*from ChiTietHoaDons
 create PROCEDURE sp_hoadon_create
 (@TenKH              NVARCHAR(50), 
  @Diachi          NVARCHAR(250), 
  @TrangThai         bit,  
+ @NgayTao datetime,
+ @SDT nvarchar(10),
+ @DiaChiGiaoHang nvarchar(250),
  @list_json_chitiethoadon NVARCHAR(MAX)
 )
 AS
     BEGIN
 		DECLARE @MaHoaDon INT;
-        INSERT INTO HoaDonBan
+        INSERT INTO HoaDons
                 ( TenKH,
 				DiaChi,
-				TrangThai
+				TrangThai,
+				NgayTao,
+				SDT,
+				DiaChiGiaoHang
                 )
                 VALUES
                 (@TenKH, 
                  @Diachi, 
-                 @TrangThai
+                 @TrangThai,
+				 @NgayTao,
+				 @SDT,
+				 @DiaChiGiaoHang
                 );
 
 				SET @MaHoaDon = (SELECT SCOPE_IDENTITY());
                 IF(@list_json_chitiethoadon IS NOT NULL)
                     BEGIN
-                        INSERT INTO ChiTietHDB
-						 (MaSP, 
-						  MaHDB,
-                          SLBan, 
-                          TongTien               
+                        INSERT INTO ChiTietHoaDons
+						 (MaSanPham, 
+						  MaHoaDon,
+                          SoLuong, 
+                          TongGia               
                         )
                     SELECT JSON_VALUE(p.value, '$.maSanPham'), 
                             @MaHoaDon, 
@@ -207,3 +150,144 @@ AS
                 END;
         SELECT '';
     END;
+
+{
+  
+  "tenKH": "Vinh",
+  "diaChi": "HD",
+  "trangThai": true,
+  "ngayTao": "2023-10-03T15:34:17.361Z",
+  "sdt": "0123456789",
+  "diaChiGiaoHang": "HD",
+  "list_json_ChiTietHD": [
+    {
+      "maChiTietHoaDon": 0,
+      
+      "maSanPham": 1,
+      "soLuong": 1,
+      "tongGia": 315000,
+      "status": 1
+    }
+  ]
+--}
+------------------------------------
+create PROCEDURE [dbo].[sp_hoa_don_update]
+(@MaHoaDon        int, 
+ @TenKH              NVARCHAR(50), 
+ @Diachi          NVARCHAR(250), 
+ @TrangThai         bit,  
+ @NgayTao datetime,
+ @SDT nvarchar(10),
+ @DiaChiGiaoHang nvarchar(250),
+ @list_json_chitiethoadon NVARCHAR(MAX)
+)
+AS
+    BEGIN
+		UPDATE HoaDons
+		SET
+			TenKH  = @TenKH ,
+			Diachi = @Diachi,
+			TrangThai = @TrangThai,
+			NgayTao=@NgayTao,
+			SDT=@SDT,
+			DiaChiGiaoHang=@DiaChiGiaoHang
+			
+		WHERE MaHoaDon = @MaHoaDon;
+		
+		IF(@list_json_chitiethoadon IS NOT NULL) 
+		BEGIN
+			 -- Insert data to temp table 
+		   SELECT
+			  JSON_VALUE(p.value, '$.maChiTietHoaDon') as maChiTietHoaDon,
+			  JSON_VALUE(p.value, '$.maHoaDon') as maHoaDon,
+			  JSON_VALUE(p.value, '$.maSanPham') as maSanPham,
+			  JSON_VALUE(p.value, '$.soLuong') as soLuong,
+			  JSON_VALUE(p.value, '$.tongGia') as tongGia,
+			  JSON_VALUE(p.value, '$.status') AS status 
+			  INTO #Results 
+		   FROM OPENJSON(@list_json_chitiethoadon) AS p;
+		 
+		 -- Insert data to table with STATUS = 1;
+			INSERT INTO ChiTietHoaDons (MaSanPham, 
+						  MaHoaDon,
+                          SoLuong, 
+                          TongGia ) 
+			   SELECT
+				  #Results.maSanPham,
+				  @MaHoaDon,
+				  #Results.soLuong,
+				  #Results.tongGia			 
+			   FROM  #Results 
+			   WHERE #Results.status = '1' 
+			
+			-- Update data to table with STATUS = 2
+			  UPDATE ChiTietHoaDons 
+			  SET
+				 SoLuong = #Results.soLuong,
+				 TongGia = #Results.tongGia
+			  FROM #Results 
+			  WHERE  ChiTietHoaDons.maChiTietHoaDon = #Results.maChiTietHoaDon AND #Results.status = '2';
+			
+			-- Delete data to table with STATUS = 3
+			DELETE C
+			FROM ChiTietHoaDons C
+			INNER JOIN #Results R
+				ON C.maChiTietHoaDon=R.maChiTietHoaDon
+			WHERE R.status = '3';
+			DROP TABLE #Results;
+		END;
+        SELECT '';
+    END;
+
+{
+  "maHoaDon": 1,
+  "tenKH": "Vinh_update",
+  "diaChi": "string",
+  "trangThai": true,
+  "ngayTao": "2023-10-03T16:03:01.965Z",
+  "sdt": "1234567890",
+  "diaChiGiaoHang": "string",
+  "list_json_ChiTietHD": [
+    {
+      "maChiTietHoaDon": 1,
+      "maHoaDon": 1,
+      "maSanPham": 1,
+      "soLuong": 1,
+      "tongGia": 315000,
+      "status": 0
+    }
+  ]
+}
+select*from HoaDons,ChiTietHoaDons
+-------------------------------------------------------------------
+create PROCEDURE sp_login(@taikhoan nvarchar(50), @matkhau nvarchar(50))
+AS
+    BEGIN
+      SELECT  *
+      FROM TaiKhoan
+      where TenTaiKhoan= @taikhoan and MatKhau = @matkhau;
+    END;
+
+
+
+create PROCEDURE [dbo].[sp_hoadon_get_by_id](@MaHoaDon        int)
+AS
+    BEGIN
+        SELECT h.*, 
+        (
+            SELECT c.*
+            FROM ChiTietHoaDons AS c
+            WHERE h.MaHoaDon = c.MaHoaDon FOR JSON PATH
+        ) AS list_json_chitiethoadon
+        FROM HoaDons AS h
+        WHERE  h.MaHoaDon = @MaHoaDon;
+    END;
+
+{
+  "username": "Admin1",
+  "password": "12345"
+}
+
+
+select*from TaiKhoan
+

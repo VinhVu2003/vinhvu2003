@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.Interfaces
 {
     public partial interface IHoaDonBanBUS
     {
-        bool Create(DonHangBanModel model);
+        bool Create(HoaDonModel model);
+        bool Update(HoaDonModel model);
     }
 }

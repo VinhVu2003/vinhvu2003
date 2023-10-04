@@ -15,10 +15,19 @@ namespace API_BTL.Controllers
             this.bus = bus;
         }
         [Route ("Create_HoaDon")]
-        [HttpGet]
-        public DonHangBanModel Create(DonHangBanModel model)
+        [HttpPost]
+        public HoaDonModel Create(HoaDonModel model)
         {
             bus.Create (model);
+            return model;
+        }
+
+        
+        [Route("Update_Hoadon")]
+        [HttpPost]
+        public HoaDonModel Update(HoaDonModel model)
+        {
+            bus.Update (model);
             return model;
         }
     }
