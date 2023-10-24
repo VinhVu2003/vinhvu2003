@@ -20,14 +20,4 @@ namespace DataModel
 
         public List<ChiTietHDModel> list_json_ChiTietHD { get; set; }
     }
-
-    public class ChiTietHDModel
-    {
-        public int MaChiTietHoaDon { get; set; }
-        public int MaHoaDon { get; set; }
-        public int MaSanPham { get; set; }
-        public int SoLuong { get; set; }
-        public double TongGia { get; set; }
-        public int status { get; set; }
-    }
 }

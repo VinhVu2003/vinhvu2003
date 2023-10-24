@@ -55,6 +55,15 @@ builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
 builder.Services.AddTransient<IHoaDonBanBUS, HoaDonBanBUS>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserBUS, UserBUS>();
+builder.Services.AddTransient<INhaPhanPhoiRepository, NhaPhanPhoiRepository>();
+builder.Services.AddTransient<INhaPhanPhoiBUS, NhaPhanPhoiBUS>();
+builder.Services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
+builder.Services.AddTransient<IHoaDonNhapBUS, HoaDonNhapBUS>();
+builder.Services.AddTransient<IChuyenMucRepository, ChuyenMucRepository>();
+builder.Services.AddTransient<IChuyenMucBUS, ChuyenMucBUS>();
+builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
+builder.Services.AddTransient<ISanPhamBUS, SanPhamBUS>();
+
 
 // configure strongly typed settings objects
 IConfiguration configuration = builder.Configuration;

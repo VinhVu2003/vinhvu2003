@@ -52,13 +52,11 @@ CREATE TABLE [dbo].[SanPhams](
 	[SoLuong] [int] ,
 	[TrangThai] [bit] ,
 	[LuotXem] [int] ,
-	[DacBiet] [bit]  
+	[DacBiet] [bit] ,
+	MaSize int foreign key references Size(MaSize) on delete cascade on update cascade;
 )
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[SanPhams_NhaPhanPhois](
 	[MaSanPham] [int] foreign key references [SanPhams]([MaSanPham]) on delete cascade on update cascade ,
 	[MaNhaPhanPhoi] [int] foreign key references [NhaPhanPhois]([MaNhaPhanPhoi]) on delete cascade on update cascade,
@@ -71,8 +69,9 @@ CREATE TABLE [dbo].[HoaDonNhaps](
 	[MaNhaPhanPhoi] [int] foreign key references [NhaPhanPhois]([MaNhaPhanPhoi]) on delete cascade on update cascade ,
 	[NgayTao] [datetime] ,
 	[KieuThanhToan] [nvarchar](max) ,
-
 )
+alter table HoaDonNhaps add MaTaiKhoan int foreign key references TaiKhoan(MaTaiKhoan) on delete cascade on update cascade;
+
 
 CREATE TABLE [dbo].[ChiTietHoaDonNhaps](
 	[Id] [int] IDENTITY(1,1)  primary key,
@@ -113,3 +112,11 @@ TenKH nvarchar(50) ,
 DiaChi nvarchar(50),
 SDT char(10) 
 )
+
+
+select*from SanPhams
+ALTER TABLE SanPhams
+ADD Size nvarchar(3);
+
+
+

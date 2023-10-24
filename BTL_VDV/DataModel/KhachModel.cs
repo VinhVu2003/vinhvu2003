@@ -14,4 +14,6 @@ namespace DataModel
         public string SDT { get; set; }
 
     }
+
+
 }
