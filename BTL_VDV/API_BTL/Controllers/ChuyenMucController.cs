@@ -1,5 +1,6 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer;
 using DataModel;
+using DataAccessLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +10,16 @@ namespace API_BTL.Controllers
     [ApiController]
     public class ChuyenMucController : ControllerBase
     {
-        private IChuyenMucBUS _bus;
+        private IChuyenMucBUS CMbus;
         public ChuyenMucController(IChuyenMucBUS bus)
         {
-            _bus = bus;
+            CMbus = bus;
         }
         [Route("ChuyenMuc_Create")]
         [HttpPost]
         public ChuyenMucModel Create(ChuyenMucModel model) 
         {
-            _bus.Create(model);
+            CMbus.Create(model);
             return model;
         }
 
@@ -26,14 +27,14 @@ namespace API_BTL.Controllers
         [HttpPost]
         public ChuyenMucModel Update(ChuyenMucModel model)
         {
-            _bus.Update(model);
+            CMbus.Update(model);
             return model;
         }
         [Route("ChuyenMuc_Delete")]
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            _bus.Delete(id);
+            CMbus.Delete(id);
             return Ok();
         }
 
@@ -47,7 +48,7 @@ namespace API_BTL.Controllers
                 var page = int.Parse(formData["page"].ToString());
                 var pageSize = int.Parse(formData["pageSize"].ToString());
                 long total = 0;
-                var data = _bus.Search(page, pageSize, out total/*l, tenSanPham*//*, gia, soluong*/);
+                var data = CMbus.Search(page, pageSize, out total/*l, tenSanPham*//*, gia, soluong*/);
                 return Ok(
                    new
                    {
@@ -63,6 +64,9 @@ namespace API_BTL.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+
+       
 
     }
 }

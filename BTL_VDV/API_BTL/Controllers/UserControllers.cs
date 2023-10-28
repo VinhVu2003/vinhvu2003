@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer;
-using BusinessLogicLayer.Interfaces;
+
 using DataModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,8 +11,8 @@ namespace API_BTL.Controllers
     [ApiController]
     public class UserControllers : ControllerBase
     {
-        private IUserBUS _user;
-        public UserControllers(IUserBUS user)
+        private UserBUS _user;
+        public UserControllers(UserBUS user)
         {
             _user=user;
         }

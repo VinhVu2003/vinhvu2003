@@ -1,10 +1,17 @@
-﻿select*from Taikhoan
+﻿DBCC CHECKIDENT ('SanPhams', RESEED)
 -----------------------------------------
 create proc KH_get_by_id
 @MaID nvarchar(30)
 as
 begin
 select * from KhachHang as k where k.MaKH=@MaID 
+end
+
+create proc Size_get_by_id
+@MaID nvarchar(30)
+as
+begin
+select * from Size as k where k.MaSize=@MaID 
 end
 
 drop proc KH_get_by_id
@@ -346,24 +353,23 @@ AS
 create proc create_NhaPhanPhoi(
 @TenNPP nvarchar(50),
 @diachi nvarchar(250),
-@sdt nvarchar(50),
-@Mota nvarchar(max))
+@sdt nvarchar(50))
 as
 begin
-	insert into NhaPhanPhois(TenNhaPhanPhoi,DiaChi,SoDienThoai,MoTa)
-	values (@TenNPP,@diachi,@sdt,@Mota)
+	insert into NhaPhanPhois(TenNhaPhanPhoi,DiaChi,SoDienThoai)
+	values (@TenNPP,@diachi,@sdt)
 end
+drop proc update_NhaPhanPhoi
 
 create proc update_NhaPhanPhoi(
 @MaNPP int,
 @TenNPP nvarchar(50),
 @diachi nvarchar(250),
-@sdt nvarchar(50),
-@Mota nvarchar(max))
+@sdt nvarchar(50))
 as
 begin
 	update NhaPhanPhois
-	set TenNhaPhanPhoi=@TenNPP, DiaChi=@diachi, SoDienThoai=@sdt,MoTa=@Mota
+	set TenNhaPhanPhoi=@TenNPP, DiaChi=@diachi, SoDienThoai=@sdt
 	where @MaNPP=MaNhaPhanPhoi
 end
 
@@ -606,106 +612,11 @@ AS
                         DROP TABLE #Results2; 
         END;
     END;
-----------------------SanPham-------------------------------------
 
-
-SELECT SP.TenSanPham, STRING_AGG(Size, ', ') AS Size, SP.Gia
-FROM SanPhams SP
-GROUP BY SP.TenSanPham, SP.Gia;
-
-select*from SanPhams
-
-drop proc create_San_Pham
-
-create proc create_San_Pham(
-
-@MaChuyenMuc int,
-@Anh nvarchar(250),
-@TenSanPham nvarchar(max),
-@Gia int,
-@SoLuong int,
-@Size nvarchar(3))
-as
-begin
-	insert into SanPhams(MaChuyenMuc,AnhDaiDien,TenSanPham,Gia,SoLuong,Size)
-	values (@MaChuyenMuc,@Anh,@TenSanPham,@Gia,@SoLuong,@Size)
-end
-
-{
-  "maChuyenMuc": 1,
-  "anhDaiDien" : "xsa",
-  "tenSanPham": "vinh",
-  "gia": 33,
-  "soLuong": 22,
-  "size": "XL"
-}
-
-
-
---create PROCEDURE [dbo].[sp_SanPham_search] (@page_index  INT, 
---                                       @page_size   INT,
---									   @tenSanPham Nvarchar(50),
---									   @gia decimal(18, 0),
---									   @SoLuong int
-									  
---									   )
---AS
---    BEGIN
---        DECLARE @RecordCount BIGINT;
---        IF(@page_size <> 0)
---            BEGIN
---						SET NOCOUNT ON;
---                        SELECT(ROW_NUMBER() OVER(
---                              ORDER BY TenSanPham ASC)) AS RowNumber, 
---							  h.MaSanPham,
---                              h.TenSanPham,
---							  h.Gia,
---							  h.SoLuong,
---							  h.MaChuyenMuc,
---							  h.AnhDaiDien
---                        INTO #Results1
---                        FROM SanPhams AS h
---					    WHERE  (@tenSanPham = '' Or h.TenSanPham like N'%'+@tenSanPham+'%') 
---						;               
---                        SELECT @RecordCount = COUNT(*)
---                        FROM #Results1;
---                        SELECT *, 
---                               @RecordCount AS RecordCount
---                        FROM #Results1
---                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
---                              OR @page_index = -1;
---                        DROP TABLE #Results1; 
---            END;
---            ELSE
---            BEGIN
---						SET NOCOUNT ON;
---                        SELECT(ROW_NUMBER() OVER(
---                              ORDER BY TenSanPham ASC)) AS RowNumber, 
---							  h.MaSanPham,
---                              h.TenSanPham,
---							  h.Gia,
---							  h.SoLuong,
---							  h.MaChuyenMuc,
---							  h.AnhDaiDien
---                        INTO #Results2
---                        FROM SanPhams AS h
---					     WHERE  (@tenSanPham = '' Or h.TenSanPham like N'%'+@tenSanPham+'%') ;              
---                        SELECT @RecordCount = COUNT(*)
---                        FROM #Results2;
---                        SELECT *, 
---                               @RecordCount AS RecordCount
---                        FROM #Results2              
---                        DROP TABLE #Results1; 
---    END;
---End;
-z	
-drop proc [SanPham_search]
-
-select*from SanPhams
-
-create PROCEDURE SanPham_search (@page_index  INT, 
-                                 @page_size  int 			  
-									   )
+--------------------------Size------------------------------------------
+select*from Size
+create PROCEDURE Size_search (@page_index  INT, 
+                                 @page_size  int)
 AS
     BEGIN
         DECLARE @RecordCount BIGINT;
@@ -713,16 +624,12 @@ AS
             BEGIN
 						SET NOCOUNT ON;
                         SELECT(ROW_NUMBER() OVER(
-                              ORDER BY h.MaSanPham ASC)) AS RowNumber, 
-                              h.MaSanPham,
-                              h.AnhDaiDien,
-							  h.TenSanPham,
-							  h.Gia,
-							  h.Size,
-							  h.SoLuong
-							
+                              ORDER BY h.MaSize ASC)) AS RowNumber, 
+                              h.MaSize,
+							  h.TenSize,
+							  h.Ghichu
                         INTO #Results1
-                        FROM SanPhams as h 
+                        FROM Size as h 
 					      
                         SELECT @RecordCount = COUNT(*)
                         FROM #Results1;
@@ -737,15 +644,12 @@ AS
             BEGIN
 						SET NOCOUNT ON;
 						SELECT(ROW_NUMBER() OVER(
-                              ORDER BY h.MaSanPham ASC)) AS RowNumber, 
-                               h.MaSanPham,
-                              h.AnhDaiDien,
-							  h.TenSanPham,
-							  h.Gia,
-							  h.Size,
-							  h.SoLuong
+                              ORDER BY h.MaSize ASC)) AS RowNumber, 
+                              h.MaSize,
+							  h.TenSize,
+							  h.Ghichu
                         INTO #Results2
-                        FROM SanPhams as h 
+                        FROM Size as h 
 						
 						SELECT @RecordCount = COUNT(*)
                         FROM #Results2;
@@ -755,12 +659,175 @@ AS
                         DROP TABLE #Results2; 
         END;
     END;
+drop proc Size_search
+----------------------SanPham-------------------------------------
 
-EXEC SanPham_search 1, 10;
+create proc Sanpham_getbyID
+@MaID nvarchar(30)
+as
+begin
+select * from SanPhams as k where k.MaSanPham=@MaID 
+end
+
+SELECT SP.TenSanPham, STRING_AGG(Size, ', ') AS Size, SP.Gia
+FROM SanPhams SP
+GROUP BY SP.TenSanPham, SP.Gia;
+
 select*from SanPhams
+select*from Size
+
+
+create proc create_San_Pham(
+
+@MaChuyenMuc int,
+@Anh nvarchar(250),
+@TenSanPham nvarchar(max),
+@Gia int,
+@SoLuong int,
+@MaSize int)
+as
+begin
+	insert into SanPhams(MaChuyenMuc,AnhDaiDien,TenSanPham,Gia,SoLuong,MaSize)
+	values (@MaChuyenMuc,@Anh,@TenSanPham,@Gia,@SoLuong,@MaSize)
+end
+
+{
+  "maChuyenMuc": 1,
+  "anhDaiDien" : "xsa",
+  "tenSanPham": "vinh",
+  "gia": 33,
+  "soLuong": 22,
+  "size": 1
+}
+
+
+drop proc SanPham_search
+
+create PROCEDURE SanPham_search (@page_index  INT, 
+                                       @page_size   INT,
+									   @TenCM nvarchar(10),
+									   @TenSize nvarchar(10)
+									   )
+AS
+    BEGIN
+        DECLARE @RecordCount BIGINT;
+        IF(@page_size <> 0)
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.MaSanPham ASC)) AS RowNumber, 
+                              h.MaSanPham,
+							  h.MaChuyenMuc,
+							  c.TenChuyenMuc,
+							  h.TenSanPham,
+							  h.AnhDaiDien,
+							  h.MaSize,
+							  s.TenSize,
+							  h.Gia,
+							  h.SoLuong
+							
+                        INTO #Results1
+                        FROM SanPhams  h
+						inner join ChuyenMucs c on c.MaChuyenMuc = h.MaChuyenMuc
+						inner join Size s on s.MaSize = h.MaSize
+					    where
+							(@TenCM = '' Or c.TenChuyenMuc like N'%'+@TenCM+'%') and
+							(@TenSize = '' Or s.TenSize like N'%'+@TenSize+'%')
+                        SELECT @RecordCount = COUNT(*)
+                        FROM #Results1;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results1
+                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
+                              OR @page_index = -1;
+                        DROP TABLE #Results1; 
+            END;
+            ELSE
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.MaSanPham ASC)) AS RowNumber, 
+                              h.MaSanPham,
+							  h.MaChuyenMuc,
+							  c.TenChuyenMuc,
+							  h.TenSanPham,
+							  h.AnhDaiDien,
+							  h.MaSize,
+							  s.TenSize,
+							  h.Gia,
+							  h.SoLuong
+                        INTO #Results2
+                        FROM SanPhams  h
+						inner join ChuyenMucs c on c.MaChuyenMuc = h.MaChuyenMuc
+						inner join Size s on s.MaSize = h.MaSize
+						where
+							(@TenCM = '' Or c.TenChuyenMuc like N'%'+@TenCM+'%') and
+							(@TenSize = '' Or s.TenSize like N'%'+@TenSize+'%')
+						SELECT @RecordCount = COUNT(*)
+                        FROM #Results2;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results2                        
+                        DROP TABLE #Results2; 
+        END;
+    END;
+
+
+
+select*from SanPhams
+
+exec SanPham_search '1','10',
 
 create proc SanPham_Delete(@MaSP nvarchar(50))
 as
 begin
 	delete from SanPhams where MaSanPham=@MaSP
 end
+{
+  "page": "1",
+  "pageSize": "5"
+}
+
+
+CREATE PROCEDURE SanPham_Update
+(
+@MaSP int,
+@MaChuyenMuc int,
+@Anh nvarchar(max),
+@TenSanPham nvarchar(max),
+@Gia int,
+@SoLuong int,
+@MaSize int
+)
+AS
+BEGIN
+    UPDATE SanPhams
+    SET MaChuyenMuc = @MaChuyenMuc,
+        AnhDaiDien = @Anh,
+        TenSanPham = @TenSanPham,
+        Gia = @Gia,
+		SoLuong=@SoLuong,
+		MaSize=@MaSize
+    WHERE MaSanPham = @MaSP;
+END;
+drop proc SanPham_Update
+select*from SanPhams
+
+
+-------------------------------------------------Trang_Nguoi_Dung---------------------------------------------------------------------
+select*from SanPhams
+select*from HoaDonNhaps
+select*from ChiTietHoaDonNhaps
+
+create proc Thoi_Trang_Moi_Nhat
+(
+
+)
+as
+begin
+	select top(6) s.TenSanPham,s.Gia,s.AnhDaiDien
+	from SanPhams s inner join ChiTietHoaDonNhaps c on s.MaSanPham=c.MaSanPham
+	inner join HoaDonNhaps h on h.MaHoaDon=c.MaHoaDon
+end;
+
+

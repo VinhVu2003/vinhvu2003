@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/admin_nha_phan_phoi.css">
+    <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
+    <title>4MenShop</title>
+</head> 
+
+<body ng-app ="AppBanHang" ng-controller ="NhaPhanPhoiCtrl">
+    <div class="admin">
+        <div class="header1">
+
+            <div class="left">
+                <i class="fa-solid fa-phone" style="color: white;"></i>
+                &nbsp; Hotline:
+                <a href="tel:0868444644" title="4MEN Hot Line" rel="nofollow">0868.444.644</a>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><a href="">Cách chọn size</a></li>
+                    <li><a href="">Chính sách khách vip</a></li>
+                    <li><a href="">Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header2">
+            <a href="trangchu.html"><img class="logo" src="./anh/banner2.png" alt=""></a>
+
+            <div class="ThemSanPham">
+                <h4 style="margin: 10px;">Thêm sản phẩm <a href="#"> <i class="fa-solid fa-x" onclick="ThemSP()"></i></a></h4>
+   
+                <hr>
+                <div class="form_dien_SP">
+                    <form action="">
+                        <div class="Ten_SP">
+                            <label for="">Tên nhà phân phối</label>
+                            <div class="Ma_SP">
+                                <input id="TenNPP" ng-model="tenNPP" type="text" placeholder="" class="Ma_SP_input">
+                            </div>
+                        </div>
+
+                        <div class="Ma_Chuyen_Muc">
+                            <label for="">Địa chỉ</label>
+                            <div class="Ma_Chuyen_Muc">
+                                <input ng-model="dC" type="text" placeholder="" class="Ma_SP_input">
+                            </div>
+                        </div>
+                       
+        
+                        <div class="Gia_SP">
+                            <label for="">Số điện thoại</label>
+                            <div class="Gia_SP">
+                                <input ng-model="sDT" type="" placeholder="" class="Gia_SP_input">
+                            </div>
+                        </div>
+        
+                        <!-- <div class="Size_SP">
+                            <label for="">Size</label>
+                            <div class="Size_SP">
+                                <input ng-model="Size" type="text" class="Size_SP_input"> -->
+                                <!-- <td><select name="" id="" class="Size_SP_input">
+                                    <option value="">S</option>
+                                    <option value="">M</option>
+                                    <option value="">L</option>
+                                    <option value="">XL</option>
+                                    <option value="">XXL</option>
+
+                                </select></td> -->
+                            <!-- </div>
+                        </div>
+        
+                        <div class="SLuong_SP">
+                            <label for="">Số lượng</label>
+                            <div class="SLuong_SP">
+                                <input ng-model="SoLuong" type="text" class="SLuong_SP_input">
+                            </div>
+                        </div>
+                      
+                    </form> -->
+                    <!-- <div class="nut">
+                        <button id="button" style="color: white;">Đăng kí</button>
+                        &nbsp;
+                        <a href="./Login.html">Đăng nhập</a>
+                    </div> -->
+                </div>
+        
+                
+        
+               
+                <a href=""><button style="margin-top: 10px" ng-click="NhaPhanPhoi_ADD()" class="Themsp">{{submit}}</button></a>
+            </div>
+
+            <div class="banner2right">
+                <div class="b1">
+                    <div class="content-logo">
+                        <a href="">
+                            <img src="./anh/admin.png" alt="">
+                        </a>
+                        <p id="VDV">Vũ Đình Vinh</p>
+                    </div>
+                    
+                    <span class="banner2span">
+                        <a href="./Login.html"><i class="fa-solid fa-right-to-bracket"></i> </a>
+                    </span>
+                </div>
+                <!-- <div class="b1">
+                    <span class="banner2span"><i class="fa-solid fa-magnifying-glass" style="color: brown;"></i></span>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="botom-head">
+            <ul >
+                <li><a href="">4MEN &nbsp; / &nbsp;</a></li>
+                <li><a href="">Trang quản trị</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="content-left">
+                <!-- <div class="content-logo">
+                    <a href="">
+                        <img src="./anh/admin.png" alt="">
+                    </a>
+                    <p>Vũ Đình Vinh</p>
+                </div> -->
+                <div class="content-menu">
+
+                    <ul class="menu-baiviet">
+                        <li>
+                            <i class="fa-solid fa-book"></i>
+                            <a href="">Bài viết giới thiệu</a></li>
+                        <ul class="baiviet-list">
+                            <li><a href="">Đăng bài viết</a></li>
+                            <li><a href="">Danh sách bài viết</a></li>
+                        </ul>
+                    </ul>
+
+
+                    <ul class="menu-sanpham">
+                        <li>
+                            <i class="fa-solid fa-bars"></i>
+                            <a href="">Quản lí sản phẩm</a>
+                        </li>
+                        <ul class="sanpham-list">
+                            <li onclick="Chuyenmuc()"><a href="">Chủng loại-Ngành hàng</a></li>
+                            <li  id="Nhaphanphoi"><a href="">Nhà phân phối</a></li>
+                            <li onclick="admin()"><a href="">Sản phẩm đang kinh doanh</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-khachhang">
+                        <li>
+                            <i class="fa-solid fa-people-group"></i>
+                            <a href="">Quản lí khách hàng</a></li>
+                        <ul class="khachhang-list">
+                            <li><a href="">Khách hàng mới</a></li>
+                            <li><a href="">Khách hàng lâu năm</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-donhang">
+                        <li>
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <a href="">Quản lí đơn hàng</a></li>
+                        <ul class="donhang-list">
+                            <li><a href="">Đơn hàng mới tạo</a></li>
+                            <li><a href="">Đơn hàng đang xử lí</a></li>
+                            <li><a href="">Đang giao cho khách</a></li>
+                            <li><a href="">Đã giao thành công</a></li>
+                            <li><a href="">Đơn hàng bị hủy</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-nhanvien">
+                        <li><a href="">Quản lí nhân viên</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-right">
+                <div class="bt-head">
+                    <button type="button" class="bt-add" onclick="ThemSP()">
+                        <i class="fa-regular fa-plus"></i>
+                        <a href="">Thêm sản phẩm</a>
+                    </button>
+                    <button type="button" class="bt-create" >
+                        <i class="fa-solid fa-trash"></i>
+                        <a href="">Delete</a>
+                    </button>
+                </div>
+                <div class="danhmuc">
+                    <h2>Quản lí nhà phân phối</h3><br>
+                    <hr>
+                    <table class="table-sp" border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <th>Mã nhà phân phối</th>
+                            <th>Tên nhà phân phối</th>
+                            <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
+                            <!-- <th>MoTa</th>
+                             -->
+                        </tr>
+                        <tr ng-repeat = "x in listNhaphanphoi">
+                            <td class="MaSP">{{x.maNhaPhanPhoi}}</td>
+                          
+                            <td class="TenSP">{{x.tenNhaPhanPhoi}}</td>
+                            <td class="Gia">{{x.diaChi}}</td>
+                            <td class="TenSIze">{{x.soDienThoai}}</td>
+                            <!-- <td class="SL"> {{x.moTa}}</td> -->
+                            <td class="sua"><button ><a href="">Sửa</a></button></td>
+                            <td class="xoa"><button ng-click = "NhaPhanPhoi_Delete(x.maNhaPhanPhoi)"><a href="">Xóa</a></button></td>
+                        </tr>
+                     
+                    </table>
+
+                    <!-- <div class="xemthem">
+                        <ul>
+                            <li class="xemthem1" ><a href="">1</a></li>
+                            <li class="xemthem2"  ><a href="">2</a></li>
+                            <li class="xemthem3" ><a href="">3</a></li>
+                            <li class="xemthem4"><a href=""><i class="fa-solid fa-chevron-right"></i></a></li>
+                            <li class="xemthem5"><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
+                        </ul>
+                    </div> -->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="./angular/angular.min.js"></script>
+    <script src="./angular/global.js"></script>
+    <script src="./angular/admin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script> 
+        function Chuyenmuc(){
+            window.location.href = "admin_chuyen_muc.html"
+        }
+        function admin(){
+            window.location.href = "admin.html"
+        }
+    </script>
+</body>
+</html>

@@ -1,20 +1,25 @@
-﻿using DataModel;
-using BusinessLogicLayer;
+﻿using System;
+using DataModel;
+using DataModel = DataModel;
+using BusinessLogicLayer.Interfaces;
+
+using BusinessLogicLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-
 namespace API_BTL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class KhachController : ControllerBase
     {
+       
         private IKhachBusiness _khachBusiness;
         private string _path;
         private IWebHostEnvironment _env;
+
         public KhachController(IKhachBusiness khachBusiness, IConfiguration configuration, IWebHostEnvironment env)
         {
-            _khachBusiness = khachBusiness;
+            this._khachBusiness = khachBusiness;
             _path = configuration["AppSettings:PATH"];
             _env = env;
         }

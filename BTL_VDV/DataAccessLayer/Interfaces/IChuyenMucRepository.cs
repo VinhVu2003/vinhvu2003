@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Interfaces
+namespace DataAccessLayer 
 {
     public partial interface IChuyenMucRepository
     {
@@ -14,5 +14,6 @@ namespace DataAccessLayer.Interfaces
         bool Update(ChuyenMucModel model);
         bool Delete(int ID);
         public List<ChuyenMucModel> Search(int pageIndex, int pageSize, out long total);
+       
     }
 }

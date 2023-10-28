@@ -1,5 +1,7 @@
 ﻿using DataModel;
 using DataAccessLayer;
+
+using DataAccessLayer;
 using System.Globalization;
 
 namespace BusinessLogicLayer

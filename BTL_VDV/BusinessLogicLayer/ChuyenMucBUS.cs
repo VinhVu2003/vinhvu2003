@@ -1,5 +1,5 @@
-﻿using BusinessLogicLayer.Interfaces;
-using DataAccessLayer.Interfaces;
+﻿
+using DataAccessLayer;
 using DataModel;
 using System;
 using System.Collections.Generic;
@@ -34,5 +34,6 @@ namespace BusinessLogicLayer
         {
             return _res.Search(pageIndex, pageSize, out total);
         }
+        
     }
 }

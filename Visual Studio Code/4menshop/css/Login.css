@@ -1,0 +1,464 @@
+*{
+    font-family: 'Roboto Condensed',sans-serif,Arial,sans-serif;
+    /* color: #333; */
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+/* ------Header1 */
+.header1{
+    width: 100%;
+    height: 40px;
+    background-color: #292929;
+    display: flex;
+    color: #CCCCCC;
+    justify-content: space-between;
+    justify-items: center;
+    box-sizing: border-box;
+    padding: 0px 15px;
+    overflow: hidden;
+}
+.left{
+    display: flex;
+    margin: 10px 0px;
+    font-size: 14px;
+    margin-left: 52px;
+}
+.left li{
+    list-style: none;
+}
+.left a{
+    color: #CCCCCC;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 0px 0px;
+}
+.right{
+    margin-right: -70px;
+}
+.right ul{
+    margin-right: 62px;
+}
+.right ul li{
+    margin-top: auto;
+    padding: 9px 0px;
+
+}
+.right ul li a{
+    color: #CCCCCC;
+    text-decoration: none;
+    
+    font-size: 14px;
+    border-right: 1px solid #3a3a3a;
+    padding: 0px 15px;
+}
+.right ul li a:hover{
+    color: #b31f2a;
+}
+.header1 ul{
+    display: flex;
+}
+.header1 ul li{
+    list-style: none;
+}
+
+/* ---------------Header2 */
+.header2{
+    box-sizing: border-box;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    background: #fff;
+    padding: 19px 0 10px 0;
+    width: 100%;
+    
+}
+.header2{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.logo{
+    margin: -16px 0px 0px 67px;
+    
+}
+/* -------------------------- */
+.banner2ul{
+    display: flex;
+    list-style: none;
+}
+.banner2ul li{
+    font-size: 15px;
+}
+.banner2ul li a{
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    padding: 10px 20px;
+    color: #333333;
+  
+    
+}
+.banner2ul li:hover>ul.sub-banner2ul{
+    display: block;
+}
+.banner2ul li a:hover{
+    color:#b31f2a;
+}
+.banner2ul ul.sub-banner2ul{
+    position: absolute;
+    background-color:#fff;
+    list-style: none;
+    display: none;
+    border: 1px solid #ededed;
+    
+}
+.sub-banner2ul a{
+    border-bottom: 1px solid #ededed;
+    font-size: 13px;
+    color: #666;
+    width: 180px;
+    
+    /* text-transform: none; */
+    /* position: relative!important */
+    
+}
+.sub-banner2ul li a:hover{
+    /* color: #262626; */
+    text-decoration: none;
+    background-color: #f5f5f5;
+    color: #b31f2a;
+}
+.banneritem1{
+    position: absolute;
+    height: 17px;
+    background: #b31f2a;
+    top: 7px;
+    padding: 2px 5px;
+    font-size: 11px;
+    /* text-transform: none;  */
+    right: 849px;
+    color: #fff;
+}
+.banneritem1::after{
+   
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 4px 4px 0;
+    border-color: #b31f2a transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -4px;
+    left: 4px;
+}
+.banneritem2{
+    position: absolute;
+    height: 17px;
+    background: #b31f2a;
+    top: 7px;
+    padding: 0px 5px;
+    font-size: 13px;
+    /* text-transform: none; */
+    right: 708px;
+    color: #fff;
+}
+.banneritem2::after{
+   
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 4px 4px 0;
+    border-color: #b31f2a transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -4px;
+    left: 4px;
+}
+/* ---------------------------- */
+.banner2right {
+    float: right;
+    height: 32px;
+    margin-right: 80px;
+
+}
+
+
+.b1{float: left;}
+.banner2span{
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    background: #ededed;
+    border: 1px solid #ededed;
+    display: inline-block;
+    line-height: 32px;
+    text-align: center;
+    margin-left: 3px;
+    font-size: 13px;
+    color: #444;
+    cursor: pointer;
+
+}
+.banner2span:hover{
+    border:1px solid brown;
+}
+.overlayitem{
+    position: absolute;
+    background-color:red;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+}
+span.hot{
+    font-size: 11px;
+}
+
+/* --------bottom-head */
+.botom-head{
+    width: 100%;
+    height: 40px;
+    background-color: #f8f8f8;
+}
+
+.botom-head ul{
+    list-style: none;
+    display: flex;
+    margin-left: 58px;
+    margin-right: 5px;
+    padding: 10px;
+}
+/* .botom-head ul li::after{
+    content: "/";
+    color: #333;
+    position: absolute;
+    right: -15px;    
+} */
+.botom-head ul li a{
+    text-decoration: none;
+    color: #333;
+    font-size: 13px;
+}
+/* -------------content */
+.content form legend{
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 30px;
+    line-height: inherit;
+    color: #333;
+    border: 0;
+    /* border-bottom: 1px solid #e5e5e5; */
+    text-align: center;
+}
+.content{
+    width: 70%;
+    height: 400px;
+    background-color: #f4f3f3;
+    margin: auto;
+    margin-top: 20px;
+    padding: 22px 0px;
+    border-radius: 25px;
+    padding-top: 105px;
+}
+
+.content form label{
+    padding: 7px 15px 0px;
+    margin-bottom: 0;
+   
+    width: 93px;
+    float: left;
+    font-size: 14px;
+    color: #333333;
+    margin-left: 130px;
+}
+.form-group{
+    width: 100%;
+    height: 34px;
+    margin-bottom: 15px;
+
+}
+.form-group-input{
+    height: 100%;
+    float: right;
+    width: 60%;
+    padding: 0px 15px;
+    margin-right: 125px;
+}
+.form-group-input input{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    padding: 10px;
+    outline-color: rgb(150, 179, 225);
+    border: 1px solid gray;
+}
+.form-group-input-div{
+    height: 100%;
+    float: left;
+    width: 63%;
+    padding: 0px ;
+    margin-left: 14px;
+    /* background-color: #e6e6e6; */
+}
+
+.nut{
+float: right;
+margin-right: 140px;
+}
+.nut button{
+    width: 79px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #4fa6ed;
+}
+.nut button a{
+    text-decoration: none;
+    color: white;
+}
+/* -------------footer---------------- */
+.footer{
+    width: 100%;
+    height: 611px;
+    box-sizing: border-box;
+    background: #1e1e1e;
+    padding: 30px 0 15px;
+    color: #bbb;
+    float: left;
+    margin-top: 20px;
+}
+.footer-one{
+    width: 23%;
+    height: 356px;
+    margin: 0px 0px 20px;
+    padding: 0px 15px;
+    float: left;
+}
+.footer-one ul li a{
+    text-decoration: none;
+    color: #bbb;
+    font-size: 14px;
+}
+.footer ul li {
+    line-height: 22px;
+    margin-bottom: 7px;
+}
+.footer-list{
+    list-style: none;
+    text-decoration: none;
+    
+}
+.footer-one ul li a:hover {
+    color: #b31f2a;
+}
+.newsletter input {
+    height: 36px;
+    background: #343434;
+    border: none;
+    color: #ccc;
+    padding: 0 20px;
+    line-height: 36px;
+    width: 100%;
+    border-radius: 3px 0 0 3px;
+    outline: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: 86px;
+}
+.newsletter button {
+    border-radius: 0 3px 3px 0;
+    background: #b31f2a;
+    height: 36px;
+    line-height: 39px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    position: relative;
+    float: right;
+    margin-top: -36px;
+}
+.footer-h5{
+    margin-bottom: 15px;
+}
+.footer-h5 a{
+    color: #eee;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 15px;
+    text-decoration: underline;
+   
+}
+
+.footer-one-ggmap{
+    width: 23%;
+    height: 356px;
+    margin: 0px 0px 20px;
+    padding: 0px 15px;
+    float: left;
+}
+.footer-one-ggmap .footer-h5 a{
+    color: #eee;
+    margin-bottom: 15px;
+    
+}
+.footer-one-ggmap img{
+    max-width: 100%;
+}
+.footer-one-ggmap ul li a:hover{
+    color: #b31f2a;
+}
+.fab, .fa-brands {
+    margin-right: 10px;
+    font-weight: 400;
+}
+/* ------------------------------------------------------------------------- */
+.footer-bottom{
+    width: 100%;
+    height: 211px;
+    background: #131313;
+    padding: 25px 0;
+    float: left;
+}
+.footer-bottom-content{
+    width: 70%;
+    margin-left: 55px;
+    float: left;
+}
+.footer-bottom-content p{
+    font-size: 14px;
+    color: #bbbbbb;
+}
+.footer-bottom-content p a{
+    color: white;
+    text-decoration: none;
+}
+.footer-bottom p{
+    color: #bbb;
+    margin: 0;
+}
+
+p.line-top {
+    border-top: 1px solid #2c2c2c;
+    margin-top: 15px;
+    padding-top: 10px;
+    clear: both;
+}
+.footer-bottom-img{
+    
+    width: 20%;
+    height: 142px;
+    float: left;
+    padding: 0px 38px;
+}
+

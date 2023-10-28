@@ -115,8 +115,14 @@ SDT char(10)
 
 
 select*from SanPhams
+create table Size(
+MaSize int identity(1,1) primary key,
+TenSize nvarchar(250),
+Ghichu nvarchar(250)
+)
+
 ALTER TABLE SanPhams
-ADD Size nvarchar(3);
+ADD MaSize int foreign key references Size(MaSize) on delete cascade on update cascade 
 
 
 

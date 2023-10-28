@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogicLayer.Interfaces
+namespace BusinessLogicLayer
 {
     public partial interface IChuyenMucBUS
     {
@@ -13,5 +13,6 @@ namespace BusinessLogicLayer.Interfaces
         bool Update(ChuyenMucModel model);
         bool Delete(int ID);
         List<ChuyenMucModel> Search(int pageIndex, int pageSize, out long total);
+        
     }
 }

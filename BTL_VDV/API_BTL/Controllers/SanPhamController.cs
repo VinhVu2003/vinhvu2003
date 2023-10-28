@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer;
 using DataModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -29,50 +29,57 @@ namespace API_BTL.Controllers
         {
             _bus.Delete(ID);
             return Ok();
-          
+
         }
 
-       
+
         [Route("search")]
         [HttpPost]
         public IActionResult Search([FromBody] Dictionary<string, object> formData)
         {
-            var response = new SanPhamGetALL_Model();
             try
             {
                 var page = int.Parse(formData["page"].ToString());
                 var pageSize = int.Parse(formData["pageSize"].ToString());
-                //string tenSanPham = "";
-                //if (formData.Keys.Contains("tenSanPham") && !string.IsNullOrEmpty(Convert.ToString(formData["tenSanPham"]))) { tenSanPham = Convert.ToString(formData["tenSanPham"]); }
-                //int gia = 0; // You can change the default value as needed.
-                //int soluong = 0; // You can change the default value as needed.
+                string TenChuyenMuc = "";
+                
+                if (formData.Keys.Contains("TenChuyenMuc") && !string.IsNullOrEmpty(Convert.ToString(formData["TenChuyenMuc"]))) { TenChuyenMuc = Convert.ToString(formData["TenChuyenMuc"]); }
 
-                //if (formData.Keys.Contains("gia") && !string.IsNullOrEmpty(Convert.ToString(formData["gia"])))
-                //{
-                //    gia = int.Parse(Convert.ToString(formData["gia"]));
-                //}
+                string TenSize = "";
+                if (formData.Keys.Contains("TenSize") && !string.IsNullOrEmpty(Convert.ToString(formData["TenSize"]))) { TenSize = Convert.ToString(formData["TenSize"]); }
 
-                //if (formData.Keys.Contains("soluong") && !string.IsNullOrEmpty(Convert.ToString(formData["soluong"])))
-                //{
-                //    soluong = int.Parse(Convert.ToString(formData["soluong"]));
-                //}
 
                 long total = 0;
-                var data = _bus.Search(page, pageSize, out total/*l, tenSanPham*//*, gia, soluong*/);
+                var data = _bus.Search(page, pageSize, out total, TenChuyenMuc, TenSize);
                 return Ok(
-                   new
-                   {
-                       TotalItems = total,
-                       Data = data,
-                       Page = page,
-                       PageSize = pageSize
-                   }
-                   );
+                    new
+                    {
+                        TotalItems = total,
+                        Data = data,
+                        Page = page,
+                        PageSize = pageSize
+                    }
+                    );
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+        [Route("SanPham_Update")]
+        [HttpPut]
+        public SanPhamModel Update(SanPhamModel model)
+        {
+            _bus.Update(model); return model;
+        }
+
+        [Route("get_by_id")]
+        [HttpGet]
+        public SanPhamModel GetAtabeyID(int id)
+        {
+            return _bus.GetDatabyID(id);
+        }
+
     }
 }

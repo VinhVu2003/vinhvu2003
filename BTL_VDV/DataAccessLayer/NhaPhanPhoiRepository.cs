@@ -1,4 +1,4 @@
-﻿using DataAccessLayer.Interfaces;
+﻿using DataAccessLayer;
 using DataModel;
 using System;
 using System.Collections.Generic;
@@ -24,8 +24,8 @@ namespace DataAccessLayer
                 var result = _db.ExecuteScalarSProcedureWithTransaction(out msgError, "create_NhaPhanPhoi",
                     "@TenNPP", model.TenNhaPhanPhoi,
                     "@diachi", model.DiaChi,
-                    "@sdt", model.SoDienThoai,
-                    "@Mota", model.MoTa);
+                    "@sdt", model.SoDienThoai
+                    );
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(Convert.ToString(result)+msgError);
@@ -47,8 +47,8 @@ namespace DataAccessLayer
                     "@MaNPP", model.MaNhaPhanPhoi,
                     "@TenNPP", model.TenNhaPhanPhoi,
                     "@diachi", model.DiaChi,
-                    "@sdt", model.SoDienThoai,
-                    "@Mota", model.MoTa);
+                    "@sdt", model.SoDienThoai
+                   );
                 if((redult != null && !string.IsNullOrEmpty(redult.ToString()) || !string.IsNullOrEmpty(msgError)))
                 {
                     throw new Exception (Convert.ToString(redult)+msgError);

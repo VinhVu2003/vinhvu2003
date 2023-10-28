@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using DataAccessLayer.Interfaces;
+using DataAccessLayer;
 using DataModel;
 using System;
 using System.Collections.Generic;
@@ -26,9 +26,18 @@ namespace BusinessLogicLayer
             return _repository.Delete(ID);
         }
 
-        public List<SanPhamGetALL_Model> Search(int pageIndex, int pageSize, out long total/*, string tenSanPham*//*, int gia, int soluong*/)
+        public bool Update(SanPhamModel m)
         {
-            return _repository.Search(pageIndex, pageSize, out total);
+            return _repository.Update(m);
+        }
+
+        public List<SanPham_Search_Model> Search(int pageIndex, int pageSize, out long total, string TenChuyenMuc, string TenSize)
+        {
+            return _repository.Search(pageIndex, pageSize, out total,TenChuyenMuc,TenSize);
+        }
+        public SanPhamModel GetDatabyID(int id)
+        {
+            return _repository.GetDatabyID(id);
         }
     }
 }
