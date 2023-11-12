@@ -1,9 +1,6 @@
 ﻿using System;
 using DataModel;
-using DataModel = DataModel;
-using BusinessLogicLayer.Interfaces;
-
-using BusinessLogicLayer.Interfaces;
+using BusinessLogicLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 namespace API_BTL.Controllers
@@ -85,7 +82,7 @@ namespace API_BTL.Controllers
             }
         }
 
-        [Authorize]
+       
         [Route("get_by_id")]
         [HttpGet]
         public KhachModel GetAtabeyID(int id)
@@ -122,6 +119,7 @@ namespace API_BTL.Controllers
         [HttpPost]
         public IActionResult SearchKH([FromBody] Dictionary<string, object> formData)
         {
+            var response = new KhachModel();
             try
             {
                 var page = int.Parse(formData["page"].ToString());

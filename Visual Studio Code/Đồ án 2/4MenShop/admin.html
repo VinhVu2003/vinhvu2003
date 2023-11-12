@@ -49,7 +49,7 @@
                                 <input ng-model="maChuyenMuc" type="text" placeholder="" class="Ma_SP_input">
                             </div> -->
                             <select ng-model="maChuyenMuc" style="width: 100%;" class="chosen-select" data-placeholder="Choose a Country...">
-                                <option ng-repeat="x in listChuyenMuc"  value="{{x.maChuyenMuc}}">{{x.tenChuyenMuc}}</option>
+                                <option ng-repeat="x in listChuyenMuc"  value="{{x.maChuyenMuc}}"></option>
                                 <!-- <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
                                 <option value="AZ">Arizona</option>  -->
@@ -77,7 +77,7 @@
 
                                 </select></td> -->
                                 <select ng-model="maSize" style="width: 100%;" class="chosen-select" data-placeholder="Choose a Country...">
-                                    <option ng-repeat="x in listSize"  value="{{x.maSize}}">{{x.tenSize}}</option>
+                                    <option ng-repeat=""  value=""></option>
                                     <!-- <option value="AL">Alabama</option>
                                     <option value="AK">Alaska</option>
                                     <option value="AZ">Arizona</option>  -->
@@ -107,11 +107,7 @@
                         <a href="./Login.html">Đăng nhập</a>
                     </div> -->
                 </div>
-        
-                
-        
-               
-                <button ng-click="Add_San_Pham()" class="">Thêm sản phẩm</button>
+                <button class="">Thêm sản phẩm</button>
             </div>
 
             <div class="banner2right">
@@ -228,16 +224,16 @@
                             <th>Số Lượng</th>
                             
                         </tr>
-                        <tr ng-repeat = "x in listSanPham" >
-                            <td >{{x.maSanPham}}</td>
-                            <td>{{x.tenChuyenMuc}}</td>
-                            <td ><img src="{{x.anhDaiDien}}" alt=""></td>
-                            <td id="tensp" >{{x.tenSanPham}}</td>
-                            <td >{{x.gia}}</td>
-                            <td >{{x.tenSize}}</td>
-                            <td >{{x.soLuong}}</td>
+                        <tr >
+                            <td ></td>
+                            <td></td>
+                            <td ><img src="" alt=""></td>
+                            <td id="tensp" ></td>
+                            <td ></td>
+                            <td ></td>
+                            <td ></td>
                             <td class="sua"><button >Sửa </button></td>
-                            <td class="xoa"><button ng-click = "Sanpham_Delete(x.maSanPham)">Xóa</button></td>
+                            <td class="xoa"><button >Xóa</button></td>
                         </tr>
                      
                     </table>

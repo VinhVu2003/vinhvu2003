@@ -347,7 +347,6 @@ Header1 */
     margin:auto;
     box-sizing: border-box;
     margin-top: 30px
-    
 }
 .hot{
     top:-7px;
@@ -403,8 +402,12 @@ Header1 */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 }
-
+.protect-money{
+    color: brown;
+    text-align: center;
+}
 .productimgpig img{
     display: block;
 }

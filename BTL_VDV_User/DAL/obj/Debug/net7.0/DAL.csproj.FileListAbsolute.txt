@@ -1,0 +1,15 @@
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\bin\Debug\net7.0\DAL.deps.json
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\bin\Debug\net7.0\DAL.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\bin\Debug\net7.0\DAL.pdb
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\bin\Debug\net7.0\DataModels.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\bin\Debug\net7.0\DataModels.pdb
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.csproj.AssemblyReference.cache
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.AssemblyInfoInputs.cache
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.AssemblyInfo.cs
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.csproj.CoreCompileInputs.cache
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.csproj.CopyComplete
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\refint\DAL.dll
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\DAL.pdb
+D:\Năm 3- Kì 1\Phát triển phần mềm hướng dịch vụ (2+1)\BTL\BTL_VDV_User\DAL\obj\Debug\net7.0\ref\DAL.dll

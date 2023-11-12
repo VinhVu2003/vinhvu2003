@@ -5,10 +5,35 @@
 
 //// Add services to the container.
 
-//builder.Services.AddTransient<IDatabaseHelper, DatabaseHelper>();
-//builder.Services.AddTransient<IKhachBusiness, KhachBusiness>();
-//builder.Services.AddTransient<IKhachRepository, KhachRepository>();
+
 //builder.Services.AddControllers();
+//builder.Services.AddTransient<IDatabaseHelper, DatabaseHelper>();
+
+//builder.Services.AddTransient<IKhachRepository, KhachRepository>();
+//builder.Services.AddTransient<IKhachBusiness, KhachBusiness>();
+
+//builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
+//builder.Services.AddTransient<IHoaDonBanBUS, HoaDonBanBUS>();
+
+//builder.Services.AddTransient<IUserRepository, UserRepository>();
+//builder.Services.AddTransient<IUserBUS, UserBUS>();
+
+//builder.Services.AddTransient<INhaPhanPhoiRepository, NhaPhanPhoiRepository>();
+//builder.Services.AddTransient<INhaPhanPhoiBUS, NhaPhanPhoiBUS>();
+
+//builder.Services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
+//builder.Services.AddTransient<IHoaDonNhapBUS, HoaDonNhapBUS>();
+
+//builder.Services.AddTransient<IChuyenMucRepository, ChuyenMucRepository>();
+//builder.Services.AddTransient<IChuyenMucBUS, ChuyenMucBUS>();
+
+//builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
+//builder.Services.AddTransient<ISanPhamBUS, SanPhamBUS>();
+
+//builder.Services.AddTransient<ISizeRepository, SizeRepository>();
+//builder.Services.AddTransient<ISizeBUS, SizeBUS>();
+
+
 //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();

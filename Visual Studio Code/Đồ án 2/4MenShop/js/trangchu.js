@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 var index = 0;
 function next(){
-    var imgs = ["./anh/slideshow1.jpg","./anh/slideshow2.jpg","./anh/slideshow3.jpg"]
+    var imgs = ["./anh/slideshow1.jpg","./anh/slideshow3.jpg","./anh/banner-top-trang-chu-3-slide-21.jpg"]
     document.getElementById('img').src = imgs[index];
     index++;
     if(index==3){

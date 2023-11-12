@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/aonam.css">
     <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
+    <script src="./angular/admin.js"></script>
+    <!-- <script src="./angular/ChiTietSanPham.js"></script> -->
     <title>4MENSHOP-AoNam</title>
 </head>
-<body>
-    <div class="aonam" ng-app ="AppBanHang" ng-controller ="SanPhamCtrl">
+<body ng-app ="AppBanHang" ng-controller ="SanPhamCtrl">
+    <div class="aonam" >
         <div class="header1">
            
             <div class="left">
@@ -155,13 +157,13 @@
         <div>
             <div class="content-left">
 
-                <div class="contentsmall" ng-repeat = "x in listSanPham">
-                    <div class="productimg">
+                <div class="contentsmall" ng-repeat = "x in " >
+                    <div class="productimg" ng-click="product(x)">
                         <div class="productimgpig">
                             <div style="width: 100%;height: 100%; position: absolute;">
                                 <a href=""><img src="{{x.anhDaiDien}}" alt=""></a>
                                 <div class="overlay" style="position: absolute;">
-                                    <div class="hoverlay-img"><a href="chitietsanpham.html"><img src="{{x.anhDaiDien}}" alt=""></a></div>
+                                    <div class="hoverlay-img"><a href=""><img src="{{x.anhDaiDien}}" alt=""></a></div>
                                 </div>
                                 <div class="overlayitem">
                                     <span class="overlayitemicon">

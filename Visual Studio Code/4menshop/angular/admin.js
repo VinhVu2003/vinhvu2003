@@ -9,8 +9,15 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
     $scope.submit = "Thêm mới";
     // $scope.GetNameSize;
 
+    $scope.product=function(x){
+      localStorage.setItem('contentsmall',x.maSanPham)
+      window.location='chitietsanpham.html'
+      console.log(x.maSanPham)
+    }
+
+
     $scope.page = 1;
-    $scope.pageSize = 100;
+    $scope.pageSize = 6;
  
 
   
@@ -23,9 +30,35 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
         }).then(function (response) {
         $scope.listSanPham = response.data.data;
         // $scope.totalItems = response.data.totalItems;
-      
+          $scope.PageIndex(response.data.totalItems)
         });
     };
+
+    $scope.PageIndex = function(total){
+      var liElements = document.querySelectorAll('.pageElement li');
+      liElements.forEach(function (li) {
+          li.remove();
+      });
+
+      var countPage = Math.ceil((total)/$scope.pageSize)
+      
+      for (let i = 1; i <= countPage; i++) {
+        var li = document.createElement('li')
+        li.className= 'page-item'
+        var a = document.createElement('a')
+        li.appendChild(a)
+        a.innerHTML = i
+        document.querySelector('.pageElement').appendChild(li)
+        li.onclick = function(){
+          $scope.changePage(i)
+        }
+      }
+    }
+
+    $scope.changePage = function(i){
+      $scope.page = i
+      $scope.GetHienThiSP()
+    }
     
     $scope.LoadSize= function () {
       $http({
@@ -198,21 +231,20 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
       var modalUpdate = document.getElementById("ThemSanPham");
       var btn_Them = document.getElementById("btn_Them");
       modalUpdate.style.display = "block";
-      
+      $scope.anhDaiDien=maSanPham.anhDaiDien;
       $http({
           method: 'GET',
           // headers: { "Authorization": 'Bearer ' + _user.token },
-          url: current_url + '/api/SanPham/get_by_id?id=' + maSanPham,
+          url: current_url + '/api/SanPham/get_by_id?id=' + maSanPham.maSanPham,
       }).then(function (response) {
           let sanpham = response.data;
-  
           $scope.maSanPham = sanpham.maSanPham;
           $scope.tenSanPham = sanpham.tenSanPham;
           $scope.maChuyenMuc = sanpham.maChuyenMuc + '';
           $scope.gia = sanpham.gia;
           $scope.maSize = sanpham.maSize + '';
           $scope.soLuong = sanpham.soLuong;
-          $scope.AnhDaiDien = sanpham.anhDaiDien;
+
       });
     };
     
@@ -242,7 +274,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
                         Gia: $scope.gia,
                         MaSize: $scope.maSize,
                         SoLuong: $scope.soLuong,
-                        anhDaiDien: "./anh/"+$scope.AnhDaiDien,
+                        anhDaiDien: "./anh"+$scope.AnhDaiDien,
                       },
                       url: current_url + '/api/SanPham/San_Pham_Create',
                   }).then(function (response) {
@@ -260,7 +292,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
                         TenSanPham:$scope.tenSanPham,
                         MaChuyenMuc:$scope.maChuyenMuc,
                         MaSize:$scope.maSize,
-                        AnhDaiDien:"./anh/"+$scope.AnhDaiDien,
+                        AnhDaiDien:"./anh"+$scope.AnhDaiDien,
                         SoLuong:$scope.soLuong,
                         Gia:$scope.gia
                       },
@@ -284,7 +316,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
                     Gia: $scope.gia,
                     MaSize: $scope.maSize,
                     SoLuong: $scope.soLuong,
-                    AnhDaiDien: "./anh/"+$scope.AnhDaiDien,
+                    AnhDaiDien: "./anh"+$scope.AnhDaiDien,
                   },
                   url: current_url + '/api/SanPham/San_Pham_Create',
               }).then(function (response) {
@@ -382,6 +414,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
 })
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 app.controller("NhaPhanPhoiCtrl", function ($scope, $http) {
+  
   $scope.listNhaphanphoi;
   $scope.LoadNhaphanphoi= function () {
       $http({
@@ -423,8 +456,6 @@ app.controller("NhaPhanPhoiCtrl", function ($scope, $http) {
       }).then(function (response) {
         alert('Xóa thành công!');
         $scope.LoadNhaphanphoi()
-       
-    
       });
   } 
   };
@@ -489,8 +520,6 @@ app.controller("NhaPhanPhoiCtrl", function ($scope, $http) {
     modalUpdate.style.display = "block";
     nut.style.display="block";
     btn_Sua.style.display="none";
-
-
   }
 
   $scope.ESC = function(){
@@ -524,7 +553,6 @@ app.controller("NhaPhanPhoiCtrl", function ($scope, $http) {
   
 })
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.controller("ChuyenMucController", function($scope,$http){
   $scope.submit="Thêm mới"
@@ -540,7 +568,7 @@ app.controller("ChuyenMucController", function($scope,$http){
   }
 
 })
-
+////////////////////////////////////////////////////////////////////
 
 
 

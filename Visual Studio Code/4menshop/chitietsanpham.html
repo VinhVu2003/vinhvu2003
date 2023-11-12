@@ -9,13 +9,16 @@
     <link
         rel="stylesheet"
         type="text/css"
-        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-      />
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
     <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
+   
+    <script src="./angular/angular.min.js"></script>
+    <script src="./angular/ChiTietSP.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <div id="chitietsanpham">
+<body >
+    <div id="chitietsanpham" ng-app="ChitietSP" ng-controller="ChitietSPController">
         <div class="header1">
            
             <div class="left">
@@ -128,10 +131,10 @@
                 <li><a href="">Áo Khoác Regular Technical AK036 Màu Rêu</a></li>
             </ul>
         </div>
-        <div class="content">
-            <div class="content-left">
+        <div class="content" >
+            <div class="content-left"  >
                 <div class="content-left-left">
-                    <div class="content-left-left-img">
+                    <!-- <div class="content-left-left-img" >
                         <img src="./anh/chitietsanpham1.1.jpg" onclick="changeImage('one')" id="one">
                     </div>
                     <div class="content-left-left-img">
@@ -142,19 +145,19 @@
                     </div>
                     <div class="content-left-left-img">
                         <img src="./anh/chitietsanpham1.4.jpg" onclick="changeImage('four')" id="four">
-                    </div>
+                    </div> -->
                     <!-- <div class="content-left-left-img">
                         <img src="./anh/chitietsanpham1.5.jpg" onclick="zoomout(this)" alt="imgage">
                     </div> -->
-                    <div class="content-left-left-img">
+                    <!-- <div class="content-left-left-img">
                         <img src="./anh/chitietsanpham1.6.jpg" onclick="changeImage('five')" id="five">
                     </div>
                     <div class="content-left-left-img">
                         <img src="./anh/chitietsanpham1.7.jpg" onclick="changeImage('six')"id=six>
-                    </div>
+                    </div> -->
                 </div>
-                <div id="content-left-right">
-                    <img src="./anh/chitietsanpham1.1.jpg" alt="" id="img-main">
+                <div id="content-left-right" style="background-color: #000000;" >
+                    <img style="width: 100%;" id="img-main" src="">
                 </div>
             </div>
             <div class="content-right">
@@ -466,7 +469,6 @@
                         ;color: red; display: flex;">
                             <i class="fa-brands fa-youtube"></i>
                         </li>
-                        <li><div class="fb-like fb_iframe_widget" data-href="https://4menshop.com/" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;font=arial&amp;href=https%3A%2F%2F4menshop.com%2F&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true&amp;width=100"><span style="vertical-align: bottom; width: 100px; height: 28px;"><iframe name="f1b2a34e4d987dc" width="100px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v2.4/plugins/like.php?app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df10f16ad1618a14%26domain%3D4menshop.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252F4menshop.com%252Ff3c70ad7c551ac%26relation%3Dparent.parent&amp;container_width=0&amp;font=arial&amp;href=https%3A%2F%2F4menshop.com%2F&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true&amp;width=100" style="border: none; visibility: visible; width: 150px; height: 28px" class=""></iframe></span></div> </li> 
                     </li>
                 </ul>
             </div>
@@ -507,7 +509,8 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
-
+    
     <script src="./js/chitietsanpham.js"></script>
+  
 </body>
 </html>

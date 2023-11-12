@@ -89,11 +89,6 @@ CREATE TABLE [dbo].[HoaDons](
 	[NgayTao] [datetime] ,
 	[NgayDuyet] [datetime] ,
 	[TongGia] [decimal](18, 0) ,
-	[TenKH] [nvarchar](50) ,
-	[GioiTinh] [bit]  ,
-	[Diachi] [nvarchar](250) ,
-	[Email] [nvarchar](50) ,
-	[SDT] [nvarchar](50) ,
 	[DiaChiGiaoHang] [nvarchar](350) ,
 	[ThoiGianGiaoHang] [datetime] ,
 )
@@ -121,8 +116,17 @@ TenSize nvarchar(250),
 Ghichu nvarchar(250)
 )
 
-ALTER TABLE SanPhams
-ADD MaSize int foreign key references Size(MaSize) on delete cascade on update cascade 
+ALTER TABLE HoaDonNhaps
+ADD TongTien decimal(18, 0)
 
 
+select*from SanPhams
+select*from HoaDonNhaps
+Select*from ChiTietHoaDonNhaps
+
+select*from HoaDons
+select*from ChiTietHoaDons
+
+ALTER TABLE HoaDons
+DROP COLUMN NgayDuyet	
 

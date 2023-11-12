@@ -12,7 +12,8 @@ namespace DataModel
         public int MaHoaDon { get; set; }
         public int MaSanPham { get; set; }
         public int SoLuong { get; set; }
-        public double TongGia { get; set; }
+        public decimal TongGia { get; set; }
+        public string GiamGia {  get; set; }
         public int status { get; set; }
     }
 }

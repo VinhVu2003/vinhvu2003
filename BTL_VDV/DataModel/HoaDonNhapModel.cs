@@ -14,6 +14,7 @@ namespace DataModel
         public string KieuThanhToan { get; set; }
         public int MaTaiKhoan {  get; set; }
 
+        public decimal TongTien {  get; set; }
         public List<ChitietHDNModel> list_js_ChitietHDN { get; set; }
     }
 

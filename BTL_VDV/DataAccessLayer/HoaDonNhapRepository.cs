@@ -27,7 +27,8 @@ namespace DataAccessLayer
                 "@NgayTao", model.NgayTao,
                 "@KieuThanhToan", model.KieuThanhToan,
                 "@MaTaiKhoan", model.MaTaiKhoan,
-                "@@list_js_ChitietHDN", model.list_js_ChitietHDN != null ? MessageConvert.SerializeObject(model.list_js_ChitietHDN) : null);
+                "@TongTien",model.TongTien,
+                "@list_js_ChitietHDN", model.list_js_ChitietHDN != null ? MessageConvert.SerializeObject(model.list_js_ChitietHDN) : null);
                 //if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 //{
                 //    throw new Exception(Convert.ToString(result) + msgError);

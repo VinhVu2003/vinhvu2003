@@ -43,7 +43,10 @@ namespace API_BTL.Controllers
                 var pageSize = int.Parse(formData["pageSize"].ToString());
                 string TenChuyenMuc = "";
                 
-                if (formData.Keys.Contains("TenChuyenMuc") && !string.IsNullOrEmpty(Convert.ToString(formData["TenChuyenMuc"]))) { TenChuyenMuc = Convert.ToString(formData["TenChuyenMuc"]); }
+                if (formData.Keys.Contains("TenChuyenMuc") && !string.IsNullOrEmpty(Convert.ToString(formData["TenChuyenMuc"]))) 
+                { 
+                    TenChuyenMuc = Convert.ToString(formData["TenChuyenMuc"]);   
+                }
 
                 string TenSize = "";
                 if (formData.Keys.Contains("TenSize") && !string.IsNullOrEmpty(Convert.ToString(formData["TenSize"]))) { TenSize = Convert.ToString(formData["TenSize"]); }
