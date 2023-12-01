@@ -59,9 +59,9 @@
 
 
 using BusinessLogicLayer;
-
+using BusinessLogicLayer.Interfaces;
 using DataAccessLayer;
-
+using DataAccessLayer.Interfaces;
 using DataModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -82,7 +82,7 @@ builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
 builder.Services.AddTransient<IHoaDonBanBUS, HoaDonBanBUS>();
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IUserBUS, UserBUS>();
+builder.Services.AddTransient<BusinessLogicLayer.IUserBUS, BusinessLogicLayer.UserBUS>();
 
 builder.Services.AddTransient<INhaPhanPhoiRepository, NhaPhanPhoiRepository>();
 builder.Services.AddTransient<INhaPhanPhoiBUS, NhaPhanPhoiBUS>();
@@ -99,6 +99,8 @@ builder.Services.AddTransient<ISanPhamBUS, SanPhamBUS>();
 builder.Services.AddTransient<ISizeRepository, SizeRepository>();
 builder.Services.AddTransient<ISizeBUS, SizeBUS>();
 
+builder.Services.AddTransient<IThongKeRepository, ThongKeRepository>();
+builder.Services.AddTransient<IThongKeBUS, ThongKeBUS>();
 
 
 // configure strongly typed settings objects

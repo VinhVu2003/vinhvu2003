@@ -227,8 +227,11 @@
                     alert(data.message);
                 } else {
                     localStorage.setItem("user", JSON.stringify(data));
-                   
-                    window.location.href = "admin.html";
+                    alert("Đăng nhập thành công!")
+                    if(alert){
+                        window.location.href = "admin.html";
+                    }
+                    
                 }
             }) .fail(function() {
               alert('Có lỗi');

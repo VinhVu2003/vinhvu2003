@@ -130,3 +130,8 @@ select*from ChiTietHoaDons
 ALTER TABLE HoaDons
 DROP COLUMN NgayDuyet	
 
+create table GioHang(
+MaGH int identity(1,1) primary key,
+MaTaiKhoan int foreign key references TaiKhoan(MaTaiKhoan) on delete cascade on update cascade,
+[MaSanPham] [int] foreign key references [SanPhams]([MaSanPham]) on delete cascade on update cascade
+)

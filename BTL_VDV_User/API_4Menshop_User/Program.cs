@@ -3,6 +3,7 @@ using BLL;
 using DAL.Interfaces;
 using DAL;
 using DataAccessLayer;
+using BusinessLogicLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,11 @@ builder.Services.AddTransient<IDatabaseHelper, DatabaseHelper>();
 
 builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
 builder.Services.AddTransient<ISanPhamBUS, SanPhamBUS>();
+builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
+builder.Services.AddTransient<IHoaDonBanBUS, HoaDonBanBUS>();
+
+builder.Services.AddTransient<IDatHangRepository, DatHangRepository>();
+builder.Services.AddTransient<IDatHangBusiness, DatHangBusiness>();
 
 
 

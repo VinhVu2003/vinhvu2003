@@ -51,10 +51,12 @@ btn.forEach(function(overlayitemicon,index){
         
       //    console.log(productName,productPrice,productImg)
         addcart(productPrice,productName,productImg)
+        alert("Thêm sản phẩm thành công!")
         
     }   
     })
 })
+
 function addcart(productPrice,productName,productImg){
     var addtr = document.createElement('div.giohang-nho')
 
@@ -92,7 +94,7 @@ function carttotal(){
         var productPrice = cartItem[i].querySelector("p.price").innerHTML
         // console.log(productPrice)
 
-        totalA = inputValue*productPrice*1000
+        var totalA = inputValue*productPrice*1000
         // totalB = totalA.toLocaleString('de-DE')
         // console.log(totalB)
 

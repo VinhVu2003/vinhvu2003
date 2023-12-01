@@ -1,4 +1,5 @@
 var _user = JSON.parse(localStorage.getItem("user"));
+console.log(_user)
 var app = angular.module('AppBanHang', []);
 app.controller("SanPhamCtrl", function ($scope, $http) {
   
@@ -17,7 +18,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
 
 
     $scope.page = 1;
-    $scope.pageSize = 6;
+    $scope.pageSize = 7;
  
 
   
@@ -25,6 +26,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
     $scope.GetHienThiSP= function () {
         $http({
         method: 'POST',
+        headers: { "Authorization": 'Bearer ' + _user.token },
         data: { page: $scope.page, pageSize: $scope.pageSize },
         url: current_url + '/api/SanPham/search',
         }).then(function (response) {
@@ -64,6 +66,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
       $http({
       method: 'POST',
       data: { page: 1, pageSize: 100 },
+      headers: { "Authorization": 'Bearer ' + _user.token },
       url: current_url + '/api/SizeCotroller/Size_Search',
       }).then(function (response) {
       $scope.listSize = response.data.data;
@@ -75,6 +78,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
         $http({
         method: 'POST',
         data: { page: 1, pageSize: 100 },
+        headers: { "Authorization": 'Bearer ' + _user.token },
         url: current_url + '/api/NhaPhanPhoi/NhaPhanPhoi_Search',
         }).then(function (response) {
         $scope.listNhaphanphoi = response.data.data;
@@ -86,6 +90,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
         $http({
         method: 'POST',
         data: { page: 1, pageSize: 100 },
+        headers: { "Authorization": 'Bearer ' + _user.token },
         url: current_url + '/api/ChuyenMuc/ChuyenMuc_Search',
         }).then(function (response) {
         $scope.listChuyenMuc = response.data.data;
@@ -234,7 +239,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
       $scope.anhDaiDien=maSanPham.anhDaiDien;
       $http({
           method: 'GET',
-          // headers: { "Authorization": 'Bearer ' + _user.token },
+          headers: { "Authorization": 'Bearer ' + _user.token },
           url: current_url + '/api/SanPham/get_by_id?id=' + maSanPham.maSanPham,
       }).then(function (response) {
           let sanpham = response.data;
@@ -261,7 +266,7 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
                 'Content-Type': undefined
             },
             data: formData,
-            url:'https://localhost:44381/api/UpLoad_/upload',
+            url:current_url + '/api/UpLoad_/upload',
           }).then(function (res) {
               $scope.AnhDaiDien = res.data.filePath
               if ($scope.submit == "Thêm mới") {
@@ -351,18 +356,20 @@ app.controller("SanPhamCtrl", function ($scope, $http) {
 
     $scope.Sanpham_Delete = function (MaSanPham) {
         
-      
         var result = confirm("Bạn có chắc muốn xóa sản phẩm này không?");
         if (result) {
-        $http
-        .delete("https://localhost:44381/api/SanPham/San_Pham_Delete?ID=" + MaSanPham)
-
+        // $http
+        // .delete("https://localhost:44381/api/SanPham/San_Pham_Delete?ID=" + MaSanPham)
+          $http({
+            method:'DELETE',
+            url:current_url+'/api/SanPham/San_Pham_Delete?ID='+ MaSanPham,
+          })
         .then(
           function (response) {
             // console.log(result)
             $http({
               method: 'POST',
-              data: { page: 1, pageSize: 10 },
+              data: { page: $scope.page, pageSize: $scope.pageSize },
               url: current_url + '/api/SanPham/search',
               })
             
@@ -420,6 +427,7 @@ app.controller("NhaPhanPhoiCtrl", function ($scope, $http) {
       $http({
       method: 'POST',
       data: { page: 1, pageSize: 100 },
+      headers: { "Authorization": 'Bearer ' + _user.token },
       url: current_url + '/api/NhaPhanPhoi/NhaPhanPhoi_Search',
       }).then(function (response) {
       $scope.listNhaphanphoi = response.data.data;
@@ -566,6 +574,19 @@ app.controller("ChuyenMucController", function($scope,$http){
     var a=document.getElementById("ThemSanPham")
     a.style.display="block";
   }
+
+  $scope.listCM;
+  $scope.LoadChuyenMuc= function () {
+      $http({
+      method: 'POST',
+      data: { page: 1, pageSize: 10 },
+      url: current_url + '/api/ChuyenMuc/ChuyenMuc_Search',
+      }).then(function (response) {
+      $scope.listCM = response.data.data;
+      console.log($scope.listNhaphanphoi)
+      });
+  };
+  $scope.LoadChuyenMuc();
 
 })
 ////////////////////////////////////////////////////////////////////

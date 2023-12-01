@@ -1,3 +1,4 @@
+var _user = JSON.parse(localStorage.getItem("user"));
 var app = angular.module('AppBanHangKH', []);
 app.controller("KhachHangController", function ($scope, $http) {
 
@@ -9,6 +10,7 @@ app.controller("KhachHangController", function ($scope, $http) {
     $scope.GetHienThiKH= function () {
         $http({
         method: 'POST',
+        headers: { "Authorization": 'Bearer ' + _user.token },
         data: { page: $scope.page, pageSize: $scope.pageSize },
         url: current_url + '/api/Khach/search',
         }).then(function (response) {
@@ -35,8 +37,13 @@ app.controller("KhachHangController", function ($scope, $http) {
     };
 
     $scope.btn_Sua = function (KH) {
+        
+
         var a = document.getElementById("btnsua");  
         a.style.display = "block";
+
+        var a = document.getElementById("btn_them");  
+        a.style.display = "none";
         
         var modalUpdate = document.getElementById("ThemSanPham");
         modalUpdate.style.display = "block";     
@@ -66,8 +73,8 @@ app.controller("KhachHangController", function ($scope, $http) {
             window.location.reload();
         }); 
     }
+    
     $scope.UpDate=function(){
-        
         $http({
             method: 'POST',
               // headers: { "Authorization": 'Bearer ' + _user.token },
@@ -108,6 +115,9 @@ app.controller("KhachHangController", function ($scope, $http) {
 
         var a = document.getElementById("btn_them");  
         a.style.display = "block";
+
+        var b = document.getElementById("btnsua");  
+        b.style.display = "none";
     }
 
 })

@@ -315,9 +315,10 @@ td{
 }
 .content-menu{
     width: 100%;
-    height: 600px;
+    height: 645px;
     /* background-color: #b31f2a; */
-    float: left;
+    position: sticky;
+    top:10px;
     margin-top: 10px;
 }
 .content-menu ul li a{
@@ -410,7 +411,9 @@ td{
     width: 100px;
     text-align: center;
 }
-.sua{
+
+.sua
+{
 width: 80px;
 text-align: center;
 }
@@ -437,6 +440,20 @@ text-align: center;
     color: #fff;
     cursor: pointer;
 }
+.xem{
+    width: 80px;
+    text-align: center;
+}
+.xem button{
+    width: 47px;
+    height: 28px;
+    background-color: #1f98b3;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
 .xemthem{
     float: right;
 }
@@ -470,6 +487,11 @@ text-align: center;
     font-size: 11px;
 
 }
+.pageElement{
+    display: flex; 
+    float: left;
+}
+
 /* ----------------------------------------footer----------------------------------------------------- */
 .footer{
     width: 100%;

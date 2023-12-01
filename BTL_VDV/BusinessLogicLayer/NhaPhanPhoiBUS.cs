@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer;
 using DataAccessLayer;
 
 using DataModel;

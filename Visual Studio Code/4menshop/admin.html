@@ -153,7 +153,7 @@
                     </a>
                     <p>Vũ Đình Vinh</p>
                 </div> -->
-                <div class="content-menu">
+                <div class="content-menu" style="position: sticky;">
 
                     <ul class="menu-baiviet">
                         <li>
@@ -172,9 +172,9 @@
                             <a href="">Quản lí sản phẩm</a>
                         </li>
                         <ul class="sanpham-list">
-                            <li onclick="Chuyenmuc()"><a href="">Chủng loại-Ngành hàng</a></li>
-                            <li onclick="Nhaphanphoi()"><a href="">Nhà phân phối</a></li>
-                            <li style="background-color: brown;"><a href="">Sản phẩm đang kinh doanh</a></li>
+                            <li ><a href="./admin_chuyen_muc.html">Chủng loại-Ngành hàng</a></li>
+                            <li ><a href="./admin_nha_phan_phoi.html">Nhà phân phối</a></li>
+                            <li style="background-color: brown;"><a href="">Sản phẩm</a></li>
                         </ul>
                     </ul>
 
@@ -194,7 +194,7 @@
                             <a href="">Quản lí đơn hàng</a></li>
                         <ul class="donhang-list">
                             <li><a href="">Đơn hàng nhập</a></li>
-                            <li onclick="DonHangBan()"><a href="">Đơn hàng bán</a></li>
+                            <li><a href="./adm_HDB.html">Đơn hàng bán</a></li>
                             <li><a href="">Đang giao cho khách</a></li>
                             <li><a href="">Đã giao thành công</a></li>
                             <!-- <li><a href="">Đơn hàng bị hủy</a></li> -->
@@ -202,7 +202,13 @@
                     </ul>
 
                     <ul class="menu-nhanvien">
-                        <li><a href="">Quản lí nhân viên</a></li>
+                        <li>
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <a href="">Thống kê</a>
+                        </li>
+                        <ul class="donhang-list" >
+                            <li ><a href="">Thống kê dữ liệu</a></li>
+                        </ul>
                     </ul>
                 </div>
             </div>
@@ -374,21 +380,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script> 
-        // var user = JSON.parse(localStorage.getItem('user'));
+        var user = JSON.parse(localStorage.getItem('user'));
         
-        // if (!user) {
-        //     window.location.href = "Login.html";
-        // }
-        function Chuyenmuc(){
-            window.location.href = "admin_chuyen_muc.html"
+        if (!user) {
+            window.location.href = "Login.html";
         }
-        function Nhaphanphoi(){
-            window.location.href = "admin_nha_phan_phoi.html"
-        }
-        function DonHangBan(){
-            window.location.href = "adm_HDB.html"
-        }
-
+       
     </script>
 </body>
 </html>

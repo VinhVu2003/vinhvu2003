@@ -3,6 +3,7 @@ using DataModel;
 using DataAccessLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_BTL.Controllers
 {
@@ -38,6 +39,7 @@ namespace API_BTL.Controllers
             return Ok();
         }
 
+        //[Authorize]
         [Route("ChuyenMuc_Search")]
         [HttpPost]
         public IActionResult Search([FromBody] Dictionary<string, object> formData)

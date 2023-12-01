@@ -204,7 +204,7 @@ Header1 */
 
 
 .b1{float: left;}
-.banner2span{
+.banner2span,.banner3span{
     width: 32px;
     height: 32px;
     border-radius: 3px;
@@ -219,7 +219,7 @@ Header1 */
     cursor: pointer;
 
 }
-.banner2span:hover{
+.banner2span:hover,.banner3span:hover{
     border:1px solid brown;
 }
 .overlayitem{
@@ -1240,4 +1240,40 @@ html{
 .back-top.active{
     opacity: 1;
 }
+
+/* ------------------------CuaSoSP-------------------------------- */
+#CuaSo_SP{
+    height: 726px;
+    display: none;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background-color: #FFF;
+    background-clip: padding-box;
+    border: none;
+    border-radius: 0;
+    outline: 0px none;
+
+    padding: 15px;
+    max-width: 95%;
+    margin: auto;
+}
+#CuaSo_SP_DIV_IMG{
+    width: 41.66666667%;
+    background-color: #131313;
+}
+/* ---------------------------------------Search-SP----------------------------------------- */
+
+#Search{
+    position: absolute;
+    width: 304px;
+    right: 79px;
+    height: 42px;
+    display: none;
+    padding-left: 10px;
+}
+
+
+
+
+
 

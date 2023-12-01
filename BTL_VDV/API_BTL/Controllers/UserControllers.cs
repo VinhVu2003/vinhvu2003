@@ -11,8 +11,8 @@ namespace API_BTL.Controllers
     [ApiController]
     public class UserControllers : ControllerBase
     {
-        private UserBUS _user;
-        public UserControllers(UserBUS user)
+        private IUserBUS _user;
+        public UserControllers(IUserBUS user)
         {
             _user=user;
         }

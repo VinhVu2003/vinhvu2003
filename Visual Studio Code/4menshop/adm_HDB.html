@@ -30,7 +30,7 @@
         <div class="header2">
             <a href="trangchu.html"><img class="logo" src="./anh/banner2.png" alt=""></a>
 
-            <div id="ThemSanPham">
+            <div id="ThemSanPham" style="z-index: 1;">
                 <h4 style="margin: 10px;">{{submit}} hóa đơn <a href=""></a></h4>
                 <button id="esc" ng-click="ESC()" >X</button>
                 <hr>
@@ -164,8 +164,8 @@
                    
                 </div>
         
-                <button style="width: 53px; height: 30px;" ng-click="Save()" >{{submit}}</button>
-                <button ng-click="Update_CTHD_ST2()"> Xác nhận</button>
+                <button id="btnAdd" style="width: 80px; height: 30px; padding: 5px;" ng-click="AddProduct()" >Thêm mới</button>
+                <button id="btnSua" ng-click="Update_CTHD_ST2()"> Xác nhận</button>
             </div>
 
             <div class="banner2right">
@@ -243,7 +243,7 @@
                             <i class="fa-solid fa-clipboard-list"></i>
                             <a href="">Quản lí đơn hàng</a></li>
                         <ul class="donhang-list">
-                            <li><a href="">Đơn hàng nhập</a></li>
+                            <li><a href="./adm_HDN.html">Đơn hàng nhập</a></li>
                             <li style="background-color: brown;"><a href="">Đơn hàng bán</a></li>
                             <li><a href="">Đang giao cho khách</a></li>
                             <li><a href="">Đã giao thành công</a></li>
@@ -252,7 +252,13 @@
                     </ul>
 
                     <ul class="menu-nhanvien">
-                        <li><a href="">Quản lí nhân viên</a></li>
+                        <li >
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <a >Thống kê</a>
+                        </li>
+                        <ul class="donhang-list" >
+                            <li ><a href="./admin_ThongKe.html">Thống kê dữ liệu</a></li>
+                        </ul>
                     </ul>
                 </div>
             </div>
@@ -268,7 +274,7 @@
                     </button>
                 </div>
                 <div class="danhmuc">
-                    <h2>Quản lí hóa đơn</h3><br>
+                    <h2>Quản lí hóa đơn bán</h3><br>
                     <hr>
                     <table class="table-sp" border="1" style="border-collapse: collapse;">
                         <tr>
@@ -292,7 +298,7 @@
                             <!-- <td >{{x.tenSanPham}}</td> -->
                             <td >{{x.diaChiGiaoHang}}</td>
                             <td >{{x.tongGia}}</td>
-                            <td >{{x.ngayTao| date: "dd/MM/yyyy"}}</td>
+                            <td >{{x.ngayTao|date:"dd/MM/yyyy"}}</td>
                             <!-- <td class="SL"> {{x.moTa}}</td> -->
                             <!-- <td><button class="Chitiet" ng-click = "">Chi tiết</button></td> -->
                             <td class="sua">
@@ -313,7 +319,7 @@
                     <div class="xemthem">
                         <ul>
                             <li ><a href=""><i class="fa-solid fa-chevron-left"></i></a></li>
-                            <div class="pageElement" style="display: flex;">
+                            <div class="pageElement" style="display: flex; float: left;">
                                 <!-- <li class="page-item" ><a href="">1</a></li> -->
                             </div>
                             <li ><a href=""><i class="fa-solid fa-chevron-right"></i></a></li>

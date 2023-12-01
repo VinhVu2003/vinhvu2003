@@ -38,49 +38,49 @@ namespace API_BTL.Controllers
             }
         }
 
-        [Route("upload")]
-        [HttpPost, DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload(IFormFile file)
-        {
-            try
-            {
-                if (file.Length > 0)
-                {
-                    string filePath = $"upload/{file.FileName}";
-                    var fullPath = CreatePathFile(filePath);
-                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                    return Ok(new { filePath });
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Không tìm thây");
-            }
-        }
+        //[Route("upload")]
+        //[HttpPost, DisableRequestSizeLimit]
+        //public async Task<IActionResult> Upload(IFormFile file)
+        //{
+        //    try
+        //    {
+        //        if (file.Length > 0)
+        //        {
+        //            string filePath = $"upload/{file.FileName}";
+        //            var fullPath = CreatePathFile(filePath);
+        //            using (var fileStream = new FileStream(fullPath, FileMode.Create))
+        //            {
+        //                await file.CopyToAsync(fileStream);
+        //            }
+        //            return Ok(new { filePath });
+        //        }
+        //        else
+        //        {
+        //            return BadRequest();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "Không tìm thây");
+        //    }
+        //}
 
-        [Route("download")]
-        [HttpPost]
-        public IActionResult DownloadData([FromBody] Dictionary<string, object> formData)
-        {
-            try
-            {
-                var webRoot = _env.ContentRootPath;
-                string exportPath = Path.Combine(webRoot + @"\Export\DM.xlsx");
-                var stream = new FileStream(exportPath, FileMode.Open, FileAccess.Read);
-                return File(stream, "application/octet-stream");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //[Route("download")]
+        //[HttpPost]
+        //public IActionResult DownloadData([FromBody] Dictionary<string, object> formData)
+        //{
+        //    try
+        //    {
+        //        var webRoot = _env.ContentRootPath;
+        //        string exportPath = Path.Combine(webRoot + @"\Export\DM.xlsx");
+        //        var stream = new FileStream(exportPath, FileMode.Open, FileAccess.Read);
+        //        return File(stream, "application/octet-stream");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
        
         [Route("get_by_id")]
@@ -114,7 +114,7 @@ namespace API_BTL.Controllers
             return Ok();
         }
 
-
+        [Authorize]
         [Route("search")]
         [HttpPost]
         public IActionResult SearchKH([FromBody] Dictionary<string, object> formData)

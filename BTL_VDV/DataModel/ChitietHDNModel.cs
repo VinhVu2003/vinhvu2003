@@ -13,8 +13,13 @@ namespace DataModel
         public int MaSanPham {  get; set; }
         public int SoLuong {  get; set; }
         public string DonViTinh {  get; set; }
-        public int GiaNhap { get; set; }
-        public int TongTien {  get; set; }
+        public decimal GiaNhap { get; set; }
+        public decimal TongTien {  get; set; }
         public int status { get; set; }
+
+        //////////////////////////////////
+        public string TenSanPham { get; set; }
+        public string AnhDaiDien { get; set; }
+        public int MaSize { get; set; }
     }
 }

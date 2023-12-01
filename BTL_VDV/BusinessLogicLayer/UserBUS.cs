@@ -18,17 +18,17 @@ namespace BusinessLogicLayer
 {
     public class UserBUS:IUserBUS
     {
-        private IUserRepository _res;
+        private IUserRepository res;
         private string secret;
         public UserBUS(IUserRepository res, IConfiguration configuration)
         {
-            _res = res;
+            this.res = res;
             secret = configuration["AppSettings:Secret"];
         }
 
         public UserModel Login(string taikhoan, string matkhau)
         {
-            var user = _res.Login(taikhoan, matkhau);
+            var user = res.Login(taikhoan, matkhau);
             if (user == null)
                 return null;
             var tokenHandler = new JwtSecurityTokenHandler();

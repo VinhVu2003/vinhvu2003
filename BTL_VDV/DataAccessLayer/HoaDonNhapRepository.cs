@@ -40,5 +40,43 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+
+        public List<HoaDonNhapModel> Search(int pageIndex, int pageSize, out long total)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = _databaseHelper.ExecuteSProcedureReturnDataTable(out msgError, "HoaDonNhap_Search",
+                    "@page_index", pageIndex,
+                    "@page_size", pageSize
+                    );
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (dt.Rows.Count > 0) total = (long)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<HoaDonNhapModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ChitietHDNModel> CTHDN_Get_List_ByID(int id)
+        {
+
+            string msgError = "";
+            try
+            {
+                var dt = _databaseHelper.ExecuteSProcedureReturnDataTable(out msgError, "Get_List_CTHDN", "@MaHD", id);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<ChitietHDNModel>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

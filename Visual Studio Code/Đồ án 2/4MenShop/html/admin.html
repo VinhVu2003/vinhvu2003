@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
+    
+    <title>4MenShop</title>
+</head> 
+
+<body ng-app ="AppBanHang" ng-controller ="SanPhamCtrl">
+    <div class="admin">
+        <div class="header1">
+
+            <div class="left">
+                <i class="fa-solid fa-phone" style="color: white;"></i>
+                &nbsp; Hotline:
+                <a href="tel:0868444644" title="4MEN Hot Line" rel="nofollow">0868.444.644</a>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><a href="">Cách chọn size</a></li>
+                    <li><a href="">Chính sách khách vip</a></li>
+                    <li><a href="">Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header2">
+            <a href="trangchu.html"><img class="logo" src="./anh/banner2.png" alt=""></a>
+
+            <div class="ThemSanPham" >
+                <h4 style="margin: 10px;">Thêm sản phẩm <a href="#"> <i class="fa-solid fa-x"></i></a></h4>
+   
+                <hr>
+                <div class="form_dien_SP">
+                    <form action="">
+                        <div class="Ten_SP">
+                            <label for="">Tên sản phẩm</label>
+                            <div class="Ma_SP">
+                                <input ng-model="tenSanPham" type="text" placeholder="" class="Ma_SP_input">
+                            </div>
+                        </div>
+
+                        <div class="Ma_Chuyen_Muc">
+                            <label for="">Mã chuyên mục</label>
+                            <!-- <div class="Ma_Chuyen_Muc">
+                                <input ng-model="maChuyenMuc" type="text" placeholder="" class="Ma_SP_input">
+                            </div> -->
+                            <select ng-model="maChuyenMuc" style="width: 100%;" class="chosen-select" data-placeholder="Choose a Country...">
+                                <option ng-repeat="x in listChuyenMuc"  value="{{x.maChuyenMuc}}"></option>
+                                <!-- <option value="AL">Alabama</option>
+                                <option value="AK">Alaska</option>
+                                <option value="AZ">Arizona</option>  -->
+                            </select>
+                        </div>
+                       
+        
+                        <div class="Gia_SP">
+                            <label for="">Giá</label>
+                            <div class="Gia_SP">
+                                <input ng-model="gia" type="" placeholder="" class="Gia_SP_input">
+                            </div>
+                        </div>
+        
+                        <div class="Size_SP">
+                            <label for="">Size</label>
+                            <div class="Size_SP">
+                                <!-- <input ng-model="size" type="text" class="Size_SP_input"> -->
+                                <!-- <td><select name="" id="" class="Size_SP_input">
+                                    <option value="">S</option>
+                                    <option value="">M</option>
+                                    <option value="">L</option>
+                                    <option value="">XL</option
+                                    <option value="">XXL</option>
+
+                                </select></td> -->
+                                <select ng-model="maSize" style="width: 100%;" class="chosen-select" data-placeholder="Choose a Country...">
+                                    <option ng-repeat=""  value=""></option>
+                                    <!-- <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>  -->
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="SLuong_SP">
+                            <label for="">Số lượng</label>
+                            <div class="SLuong_SP">
+                                <input ng-model="soLuong" type="text" class="SLuong_SP_input">
+                            </div>
+                        </div>
+
+                        <div class="anh" style="margin-bottom: 10px;">
+                            <label for=""> Ảnh</label>
+                            <div class="">
+                                <input id="upload_Img" ng-model="anhDaiDien" type="file" class="SLuog_SP_input">
+                            </div>
+                        </div>
+                        
+                      
+                    </form>
+                    <!-- <div class="nut">
+                        <button id="button" style="color: white;">Đăng kí</button>
+                        &nbsp;
+                        <a href="./Login.html">Đăng nhập</a>
+                    </div> -->
+                </div>
+                <button class="">Thêm sản phẩm</button>
+            </div>
+
+            <div class="banner2right">
+                <div class="b1">
+                    <div class="content-logo">
+                        <a href="">
+                            <img src="./anh/admin.png" alt="">
+                        </a>
+                        <p id="VDV">Vũ Đình Vinh</p>
+                    </div>
+                    
+                    <span class="banner2span">
+                        <a href="./Login.html"><i class="fa-solid fa-right-to-bracket"></i> </a>
+                    </span>
+                </div>
+                <!-- <div class="b1">
+                    <span class="banner2span"><i class="fa-solid fa-magnifying-glass" style="color: brown;"></i></span>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="botom-head">
+            <ul >
+                <li><a href="">4MEN &nbsp; / &nbsp;</a></li>
+                <li><a href="">Trang quản trị</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="content-left">
+                <!-- <div class="content-logo">
+                    <a href="">
+                        <img src="./anh/admin.png" alt="">
+                    </a>
+                    <p>Vũ Đình Vinh</p>
+                </div> -->
+                <div class="content-menu">
+
+                    <ul class="menu-baiviet">
+                        <li id="clickBaiviet" style="color: #eee;">
+                            <i class="fa-solid fa-book"></i>
+                            Bài viết giới thiệu
+                        </li>
+                        <ul class="baiviet-list">
+                            <li><a href="">Đăng bài viết</a></li>
+                            <li><a href="">Danh sách bài viết</a></li>
+                        </ul>
+                    </ul>
+
+
+                    <ul class="menu-sanpham">
+                        <li>
+                            <i class="fa-solid fa-bars"></i>
+                            <a href="">Quản lí sản phẩm</a>
+                        </li>
+                        <ul class="sanpham-list">
+                            <li ><a href="">Chủng loại-Ngành hàng</a></li>
+                            <li ><a href="">Nhà phân phối</a></li>
+                            <li style="background-color: brown;"><a href="">Sản phẩm đang kinh doanh</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-khachhang">
+                        <li>
+                            <i class="fa-solid fa-people-group"></i>
+                            <a href="">Quản lí khách hàng</a></li>
+                        <ul class="khachhang-list">
+                         
+                            <li><a href="">Khách hàng</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-donhang">
+                        <li>
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            <a href="">Quản lí đơn hàng</a></li>
+                        <ul class="donhang-list">
+                            <li><a href="">Đơn hàng nhập</a></li>
+                            <li><a href="">Đơn hàng bán</a></li>
+                            <li><a href="">Đang giao cho khách</a></li>
+                            <li><a href="">Đã giao thành công</a></li>
+                            <li><a href="">Đơn hàng bị hủy</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-nhanvien">
+                        <li><a href="">Quản lí nhân viên</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-right">
+                <div class="bt-head">
+                    <button type="button" class="bt-add" onclick="ThemSP()">
+                        + Thêm sản phẩm
+                    </button>
+                    <button type="button" class="bt-create" >
+                        <i class="fa-solid fa-trash"></i>
+                        Delete
+                    </button>
+                </div>
+                <div class="danhmuc">
+                    <h2>Quản lí sản phẩm</h3><br>
+                    <hr>
+                    <table class="table-sp" border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <!-- <th>Mã SP</th> -->
+                            <th>Chuyên mục</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Giá</th>
+                            <th>Size</th>
+                            <th>Số Lượng</th>
+                            
+                        </tr>
+
+                        <tr >
+                            <td>Áo sơ mi</td>
+                            <td >Áo Sơ Mi Tay Dài Rã Ngực Thêu 4M Form Slimfit SM140 Màu Trắng</td>
+                            <td ><img src="./anh/ao-so-mi-tay-dai-ra-nguc-theu-4m-form-slimfit-sm140-mau-trang-18319.jpg" alt=""></td>
+                            <td >345.000</td>
+                            <td >S</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo khoác</td>
+                            <td >Áo Khoác Kaki Rã Phối Viền Lé Gắn Tag Silicon Form Regular AK055 Màu Be</td>
+                            <td ><img src="./anh/admin_SanPham/ao-khoac-kaki-ra-phoi-vien-le-gan-tag-silicon-form-regular-ak055_small-18302.jpg" alt=""></td>
+                            <td >645.000</td>
+                            <td >M</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo khoác</td>
+                            <td >Áo Khoác Da Lộn Rã Phối Regular AK054 Màu Nâu</td>
+                            <td ><img src="./anh/admin_SanPham/ao-khoac-da-lon-ra-phoi-regular-ak054-mau-den_small-18279.jpg" alt=""></td>
+                            <td >645.000</td>
+                            <td >XL</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo thun</td>
+                            <td >Áo Thun Rã Phối Form Regular AT137 Màu Đen</td>
+                            <td ><img src="./anh/admin_SanPham/ao-thun-ra-phoi-form-regular-at137-mau-trang_small-18276.jpg" alt=""></td>
+                            <td >295.000</td>
+                            <td >XL</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo thun</td>
+                            <td >Áo Thun Rã Phối Form Regular AT137 Màu Trắng</td>
+                            <td ><img src="./anh/admin_SanPham/ao-thun-ra-phoi-form-regular-at137_small-18275.jpg" alt=""></td>
+                            <td >300.000</td>
+                            <td >S</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo polo</td>
+                            <td >Áo Polo Rã Phối Thêu CEST LA VIE Form SLimfit PO115 Màu Hồng</td>
+                            <td ><img src="./anh/admin_SanPham/ao-polo-ra-phoi-theu-cest-la-vie-form-slimfit-po115-mau-hong_small-18266.jpg " alt=""></td>
+                            <td >300.000</td>
+                            <td >L</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo VEST</td>
+                            <td >Áo Vest Cổ V 3 Hàng Nút Linen AV1137 Màu Xanh Bích</td>
+                            <td ><img src="./anh/admin_SanPham/ao-vest-co-v-3-hang-nut-linen-mau-xanh-bich-18212.jfif" alt=""></td>
+                            <td >300.000</td>
+                            <td >X</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+
+                        <tr >
+                            <td>Áo Gile</td>
+                            <td >Áo Gile Trơn 4 Nút Form Slimfit AG036 Màu Đen</td>
+                            <td ><img src="./anh/admin_SanPham/gile-slimfit-tron-4-nut-ag036-mau-den_small-18195.jpg" alt=""></td>
+                            <td >300.000</td>
+                            <td >M</td>
+                            <td >100</td>
+                            <td class="sua"><button >Sửa </button></td>
+                            <td class="xoa"><button >Xóa</button></td>
+                        </tr>
+                     
+                    </table>
+
+                    <div class="xemthem">
+                        <ul>
+                            <li class="xemthem1" ><a href="">1</a></li>
+                            <li class="xemthem2"  ><a href="">2</a></li>
+                            <li class="xemthem3" ><a href="">3</a></li>
+                            <li class="xemthem4"><a href=""><i class="fa-solid fa-chevron-right"></i></a></li>
+                            <li class="xemthem5"><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-one" style="margin-left: 40px;">
+                <img type="image" src="https://4menshop.com/logo-footer.png?v=1" >
+                <ul class="footer-list" style="text-decoration: none;" >
+                    <li>
+                        <a href="" title="gioi thieu">Giới thiệu</a>
+                    </li>
+                    <li><a href="" title="lien he">Liên hệ</a></li>
+                    <li><a href="" title="tuyen dung">Tuyển dụng</a></li>
+                    <li><a href="" title="tin tuc 4MEN">Tin tức</a></li>
+                    <ul style="text-decoration: none; list-style: none;font-size: 14px;">
+                        <li>
+                            <i class="fa-regular fa-envelope"></i>
+                            Email: 
+                            <a href="mailto:info@4menshop.com" rel="nofollow" title="4MEN EMAIL">info@4menshop.com</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            Hotline: 
+                            <a href="tel:0868444644" rel="nofollow" title="4MEN HOTLINE" track="Phone-Footer-0868.444.644">0868.444.644</a>
+                        </li>
+                        <div>
+                            <form class="newsletter" action="https://4menshop.com/dang-ky-nhan-mail-khuyen-mai.html" method="post"> 
+                                <label>	
+                                    Đăng ký nhận email khuyến mãi <br>
+                                    <input type="text" placeholder="Email của bạn" name="email"> 
+                                </label> 
+                                
+                                <button type="submit">
+                                    Đăng ký
+                                </button>
+                             </form>
+                        </div>
+                    </ul>
+                </ul>
+            </div>
+
+
+            <div class="footer-one">
+                <h5 class="footer-h5" style="color: #eee;"><a href="">Hỗ trợ khách hàng</a></h5>
+                <ul class="footer-list" style="text-decoration: none;" >
+                    <li>
+                        <a href="" title="gioi thieu">Hướng dẫn đặt hàng</a>
+                    </li>
+                    <li><a href="" title="lien he">Hướng dẫn chọn size</a></li>
+                    <li><a href="" title="tuyen dung">Câu hỏi thường gặp</a></li>
+                    <li><a href="" title="tin tuc 4MEN">Chính sách khách VIP</a></li>
+                    <li><a href="">Thanh toán - Giao hàng</a></li>
+                    <li><a href="">Chính sách đổi hàng</a></li>
+                    <li><a href="">Chính sách bảo mật</a></li>
+                    <li><a href="">Chính sách cookie</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-one-ggmap">
+                <h5 class="footer-h5" style="color: #eee;"><a href="">hệ thống cửa hàng</a></h5>
+                <a href="/cua-hang.html" title="cua hang"><img  type="image" src="https://4menshop.com/images/footer-map.jpg" alt="dang ky bo cong thuong" style="margin-bottom: 10px;" have-change="1"></a>
+                <ul class="footer-list" >
+                    <li>
+                        <a href="" title="gioi thieu" style="text-decoration: none; color: #666;font-size: 14px;">
+                            Tìm địa chỉ gần CỬA HÀNG gần bạn</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-one-ggmap">
+                <h5 class="footer-h5" style="color: #eee;"><a href="">Kết nối với 4MEN</a></h5>
+                <a href="/cua-hang.html" title="cua hang"><img  type="image" src="./anh/slideshow1.jpg" alt="dang ky bo cong thuong" style="margin-bottom: 10px;" have-change="1"></a>
+                <ul class="footer-list" >
+                    <li>
+                        <li>
+                             <a href="https://www.facebook.com/4men.com.vn" class="facebook" title="facebook page" rel="noreferrer" target="_blank"></a> 
+                        </li>  
+                        <li style="float: left;font-size: 23px;
+                        ;color: cornflowerblue;" >
+                            <i class="fa-brands fa-facebook"></i>
+                        </li>
+                        <li style="float: left;font-size: 23px;
+                        ">
+                            <img style="border-radius: 5px;width: 20px;height: 20px;" src="./anh/íntragram.jpg">
+                        </li>
+                        <lis style="float: left;margin-left:7px;font-size: 23px;
+                        ;color: red; display: flex;">
+                            <i class="fa-brands fa-youtube"></i>
+                        </li>
+                        <li><div class="fb-like fb_iframe_widget" data-href="https://4menshop.com/" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;font=arial&amp;href=https%3A%2F%2F4menshop.com%2F&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true&amp;width=100"><span style="vertical-align: bottom; width: 100px; height: 28px;"><iframe name="f1b2a34e4d987dc" width="100px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v2.4/plugins/like.php?app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df10f16ad1618a14%26domain%3D4menshop.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252F4menshop.com%252Ff3c70ad7c551ac%26relation%3Dparent.parent&amp;container_width=0&amp;font=arial&amp;href=https%3A%2F%2F4menshop.com%2F&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true&amp;width=100" style="border: none; visibility: visible; width: 150px; height: 28px" class=""></iframe></span></div> </li> 
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>Copyright 2023 · Thiết kế và phát triển bởi <a href="https://4menshop.com/" title="4MEN SHOP">4MEN SHOP</a> All rights reserved</p>
+             
+                    <p class="line-top">
+                        Chủ quản: ông Nguyễn Ngọc Năm. <br>
+                        MST cá nhân: 0312028096 <br>
+                        Số ĐKKD: 41G8031109 do UBND Quận 7 - Tp.HCM cấp ngày 05/06/2017 
+                    </p>
+
+                 
+                    <p class="line-top f-brand" style="color: #ff0000;">Nhãn hiệu "4MEN" đã được đăng kí độc quyền tại Cục sở hữu trí tuệ Việt Nam</p>
+                   
+                </div>
+                <div class="footer-bottom-img"><a href=""><img src="./anh/footer-bottom.png"></a></div>
+                
+                </div>
+               
+                
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/admin_SanPham.js"></script>
+
+    
+</body>
+</html>

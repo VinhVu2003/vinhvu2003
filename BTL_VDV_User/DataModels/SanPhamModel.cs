@@ -11,14 +11,15 @@ namespace DataModels
         public int MaSanPham { get; set; }
         public int MaChuyenMuc { get; set; }
         //public string tenchuyenmuc { get; set; }
-        public string TenSanPham { set; get; }
-        public string AnhDaiDien { set; get; }
-        public decimal Gia { set; get; }
-        public decimal GiaGiam { set; get; }
-        public int SoLuong { set; get; }
-        public bool TrangThai { set; get; }
-        public int LuotXem { set; get; }
-        public int MaSize { get; set; }
-        //public string TenSize { get; set; }
+        public string TenSanPham { get; set; }
+        public string AnhDaiDien { get; set; }
+        public decimal Gia { get; set; }
+        public decimal GiaGiam { get; set; }
+        public int SoLuong { get; set; }
+        public bool TrangThai { get; set;}
+        public int LuotXem { get; set; }
+        public int Masize { get; set; }
+        public string TenSize { get; set; }
+    
     }
 }

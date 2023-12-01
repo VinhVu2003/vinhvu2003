@@ -4,7 +4,7 @@ app.controller("HoaDonBanController", function ($scope, $http) {
     $scope.listHDB;
     $scope.listSanPham;
     $scope.list_CTHD;
-    $scope.submit = "Thêm mới";
+   
     
   
     $scope.page = 1;
@@ -51,9 +51,8 @@ app.controller("HoaDonBanController", function ($scope, $http) {
     // };
       
     $scope.btn_Sua = function (maHoaDon) {
-      $scope.submit = "Sửa";
       var modalUpdate = document.getElementById("ThemSanPham");
-      var btn_Them = document.getElementById("btn_Them");
+      // var btn_Them = document.getElementById("btn_Them");
       modalUpdate.style.display = "block";
 
       var TT = document.getElementById("div_TT");
@@ -61,6 +60,9 @@ app.controller("HoaDonBanController", function ($scope, $http) {
 
       var CTHD = document.getElementById("CTHD");
       CTHD.style.display = "block";
+
+      var btnSua = document.getElementById("btnAdd");
+      btnSua.style.display = "none";
       
       $http({
           method: 'GET',
@@ -189,34 +191,30 @@ app.controller("HoaDonBanController", function ($scope, $http) {
       }  
     }
 
-    $scope.Save=function(){
-      if($scope.submit = "Thêm mới"){    
-        $http({
-          method: 'POST',
-            // headers: { "Authorization": 'Bearer ' + _user.token },
-          data: {
-              trangThai:true,
-              ngayTao: new Date(),
-              tongGia: $scope.tongGia,
-              diaChiGiaoHang:$scope.diaChiGiaoHang,
-              maKH: $scope.maKH,
-              list_json_ChiTietHD: [{
-                maSanPham: $scope.maSanPham,
-                soLuong: $scope.soLuong,
-                tongGia: $scope.tongGiasp,
-                giamGia: $scope.giamGia
-              }]
-          },
-          url: current_url + '/api/HoaDonBan/Create_HoaDon',
-        })
-        .then(function (response) {
-          alert("Thêm đơn hàng thành công!");
-          window.location.reload();
-        }); 
-      }
-      else{
-        
-      }
+    $scope.AddProduct=function(){
+      $http({
+        method: 'POST',
+          // headers: { "Authorization": 'Bearer ' + _user.token },
+        data: {
+            trangThai:true,
+            ngayTao: new Date(),
+            tongGia: $scope.tongGia,
+            diaChiGiaoHang:$scope.diaChiGiaoHang,
+            maKH: $scope.maKH,
+            list_json_ChiTietHD: [{
+              maSanPham: $scope.maSanPham,
+              soLuong: $scope.soLuong,
+              tongGia: $scope.tongGiasp,
+              giamGia: $scope.giamGia
+            }]
+        },
+        url: current_url + '/api/HoaDonBan/Create_HoaDon',
+      })
+      .then(function (response) {
+        alert("Thêm đơn hàng thành công!");
+        window.location.reload();
+      }); 
+      
     }
 
     // $scope.KH_getbyid=function(maKH_TG){
@@ -265,6 +263,9 @@ app.controller("HoaDonBanController", function ($scope, $http) {
 
       var CTHD = document.getElementById("CTHD");
       CTHD.style.display = "none";
+
+      var btnsua = document.getElementById("btnSua");
+      btnsua.style.display="none";
 
     }
   

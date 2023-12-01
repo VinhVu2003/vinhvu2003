@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.Interfaces;
+﻿using BusinessLogicLayer;
 using DataAccessLayer;
 using DataModel;
 using System;
@@ -19,6 +19,14 @@ namespace BusinessLogicLayer
         public bool Create(HoaDonNhapModel model)
         {
             return _res.Create(model);
+        }
+        public List<HoaDonNhapModel> Search(int pageIndex, int pageSize, out long total)
+        {
+            return _res.Search(pageIndex, pageSize, out total);
+        }
+        public List<ChitietHDNModel> CTHDN_Get_List_ByID(int id)
+        {
+            return _res.CTHDN_Get_List_ByID(id);
         }
     }
 }

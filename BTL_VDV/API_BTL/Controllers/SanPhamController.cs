@@ -32,7 +32,7 @@ namespace API_BTL.Controllers
 
         }
 
-
+        //[Authorize]
         [Route("search")]
         [HttpPost]
         public IActionResult Search([FromBody] Dictionary<string, object> formData)

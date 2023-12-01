@@ -1,5 +1,7 @@
 ﻿DBCC CHECKIDENT ('SanPhams', RESEED)
-select*from SanPhams
+select*from HoaDons
+
+select*from ChiTietHoaDons
 -----------------------------------------
 create proc KH_get_by_id
 @MaID int
@@ -110,6 +112,7 @@ exec [sp_khach_search] '1','10','',''
   "pageSize": "1"
 }
 ----------------Hoa DOn Ban---------------------------------------
+select*from KhachHang
 select*from HoaDons
 select*from ChiTietHoaDons
 select*from SanPhams
@@ -124,7 +127,7 @@ create PROCEDURE sp_hoadon_create
  @TongGia float,
  @MaKH int,
  @list_json_chitiethoadon NVARCHAR(MAX)
-)s
+)
 AS
     BEGIN
 		DECLARE @MaHoaDon INT;
@@ -608,7 +611,7 @@ AS
         END;
     END;
 
----------------------------Hoa_Don_Nhap-----------------------------------------------------------------
+---------------------------------------------------------------Hoa_Don_Nhap-----------------------------------------------------------------
 
 create PROCEDURE sp_hoadonnhap_create
 ( 
@@ -664,7 +667,7 @@ AS
                 END;
         SELECT '';
     END;
-drop PROCEDURE sp_hoadonnhap_create
+
 
 create proc HoaDonNhap_Delete(@MaHD int)
 as
@@ -717,6 +720,70 @@ select*from SanPhams
     }
   ]
 }
+select*from HoaDonNhaps
+select*from ChiTietHoaDonNhaps
+exec HoaDonNhap_Search '1','20'
+create PROCEDURE HoaDonNhap_Search (@page_index  INT, 
+                                       @page_size   INT
+									   )
+AS
+    BEGIN
+        DECLARE @RecordCount BIGINT;
+        IF(@page_size <> 0)
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.MaHoaDon ASC)) AS RowNumber, 
+                              h.MaHoaDon,
+							  h.MaNhaPhanPhoi,
+							  h.NgayTao,
+							  h.KieuThanhToan,
+							  h.MaTaiKhoan,
+							  h.TongTien
+                        INTO #Results1
+                        FROM HoaDonNhaps  h
+                        SELECT @RecordCount = COUNT(*)
+                        FROM #Results1;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results1
+                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
+                              OR @page_index = -1;
+                        DROP TABLE #Results1; 
+            END;
+            ELSE
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.MaHoaDon ASC)) AS RowNumber, 
+                              h.MaHoaDon,
+							  h.MaNhaPhanPhoi,
+							  h.NgayTao,
+							  h.KieuThanhToan,
+							  h.MaTaiKhoan,
+							  h.TongTien
+                        INTO #Results2
+                        FROM HoaDonNhaps  h		
+						
+						SELECT @RecordCount = COUNT(*)
+                        FROM #Results2;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results2                        
+                        DROP TABLE #Results2; 
+        END;
+    END;
+
+Create proc Get_List_CTHDN(@MaHD int)
+as
+	begin
+		select 
+		from ChiTietHoaDonNhaps c inner join SanPhams s on c.MaSanPham=s.MaSanPham
+		where c.MaHoaDon=@MaHD
+end
+
+select*from ChiTietHoaDonNhaps
+exec Get_List_CTHDN '13'
 -------------------------------------chuyenmuc-----------------------------------------
 create proc create_chuyen_muc(
 @TenChuyenMuc nvarchar(250),
@@ -963,7 +1030,7 @@ AS
 
 select*from SanPhams
 
-exec SanPham_search '1','10','Áo',''
+exec SanPham_search '1','10','Áo','XL'
 
 create proc SanPham_Delete(@MaSP nvarchar(50))
 as
@@ -1166,9 +1233,6 @@ AS
     END;
 
 
-exec User_Hot_Product '1','6','2023-11-09','2023-11-10'
-
-
 create PROCEDURE User_Hot_Product (@page_index  INT, 
                                        @page_size   INT,
 									   @fr_NgayTao datetime, 
@@ -1250,9 +1314,71 @@ AS
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 select*from SanPhams
 select*from ChuyenMucs
-create PROCEDURE User_SP_Search_ChuyenMuc (@page_index  INT, 
+
+drop proc User_SP_Search_ChuyenMuc
+
+CREATE PROCEDURE User_SP_Search_ChuyenMuc (
+    @page_index INT, 
+    @page_size INT,
+    @MaCM INT
+)
+AS
+BEGIN
+    DECLARE @RecordCount BIGINT;
+
+    IF (@page_size <> 0)
+    BEGIN
+        SET NOCOUNT ON;
+
+        -- Sử dụng ROW_NUMBER() để chọn bản ghi duy nhất cho mỗi TenSanPham và lấy dữ liệu vào bảng tạm #Results1
+        SELECT *
+        INTO #Results1
+        FROM (
+            SELECT ROW_NUMBER() OVER(PARTITION BY TenSanPham ORDER BY TenSanPham) AS RowNumber,
+                   s.MaSanPham,
+                   s.MaChuyenMuc,
+                   s.TenSanPham,
+                   s.Gia,
+                   s.AnhDaiDien
+            FROM SanPhams s
+            WHERE @MaCM = s.MaChuyenMuc
+        ) AS SubQuery
+        WHERE RowNumber = 1;
+
+        -- Đếm số lượng bản ghi duy nhất
+        SELECT @RecordCount = COUNT(*)
+        FROM #Results1;
+
+        -- Lấy dữ liệu duy nhất kèm theo số lượng bản ghi và vị trí trang
+        SELECT *, 
+               @RecordCount AS RecordCount
+        FROM #Results1
+        WHERE RowNumber BETWEEN (@page_index - 1) * @page_size + 1 AND ((@page_index - 1) * @page_size + 1) + @page_size - 1
+              OR @page_index = -1;
+
+        DROP TABLE #Results1; 
+    END;
+    -- Xử lý ELSE ở đây nếu cần
+END;
+{
+  "page": "1",
+  "pageSize": "10",
+  "MaChuyenMuc": "2"
+}
+select*from ChuyenMucs
+exec User_SP_Search_ChuyenMuc '1','10',4
+
+drop proc Get_all_Size
+
+select*from SanPhams
+exec Get_all_Size '1','10', N'Áo sơ mi 1'
+
+
+
+create PROCEDURE Get_all_Size (@page_index  INT, 
                                        @page_size   INT,
-									   @MaCM int)
+									   @ten_SP Nvarchar(50)
+									   )
 AS
     BEGIN
         DECLARE @RecordCount BIGINT;
@@ -1260,18 +1386,15 @@ AS
             BEGIN
 						SET NOCOUNT ON;
                         SELECT(ROW_NUMBER() OVER(
-                              ORDER BY s.MaSanPham ASC)) AS RowNumber, 
-								s.MaSanPham,
-								s.MaChuyenMuc,
-								s.TenSanPham,
-								s.SoLuong,
-								s.Gia,
-								s.AnhDaiDien,
-								s.MaSize
+                              ORDER BY sz.TenSize ASC)) AS RowNumber, 
+							  s.MaSize,
+							  sz.TenSize
+							  
                         INTO #Results1
-                        FROM   SanPhams s
-					    WHERE  (@MaCM=s.MaChuyenMuc)
-						              
+                        FROM SanPhams  s
+						inner join Size sz on s.MaSize = sz.MaSize
+					    WHERE  (@ten_SP = '' Or s.TenSanPham like N'%'+@ten_SP+'%') 					
+						          
                         SELECT @RecordCount = COUNT(*)
                         FROM #Results1;
                         SELECT *, 
@@ -1285,17 +1408,14 @@ AS
             BEGIN
 						SET NOCOUNT ON;
                         SELECT(ROW_NUMBER() OVER(
-                              ORDER BY s.MaSanPham ASC)) AS RowNumber, 
-								s.MaSanPham,
-								s.MaChuyenMuc,
-								s.TenSanPham,
-								s.SoLuong,
-								s.Gia,
-								s.AnhDaiDien,
-								s.MaSize
+                              ORDER BY sz.TenSize ASC)) AS RowNumber, 
+							  s.MaSize,
+							  sz.TenSize
+							
                         INTO #Results2
-                        FROM  SanPhams s
-					    WHERE (@MaCM=s.MaChuyenMuc)
+                        FROM SanPhams  s
+						inner join Size sz on s.MaSize = sz.MaSize
+					    WHERE  (@ten_SP = '' Or s.TenSanPham like N'%'+@ten_SP+'%') 	
 						SELECT @RecordCount = COUNT(*)
                         FROM #Results2;
                         SELECT *, 
@@ -1304,9 +1424,416 @@ AS
                         DROP TABLE #Results2; 
         END;
     END;
+-----------------------------------------------------GioHang------------------------------------------------------
+
+select*from KhachHang 
+select*from TaiKhoan
+select*from SanPhams
+create proc create_gio_hang(
+@MaTaiKhoan int,
+@MaSanPham int)
+as
+begin
+	insert into GioHang(MaTaiKhoan,MaSanPham)
+	values (@MaTaiKhoan,@MaSanPham)
+end
+
+create proc Get_all_GioHang
+as
+begin
+	select*from GioHang
+end
+
+
+create proc delete_giohang
+as
+begin
+	delete from GioHang 
+end
+exec Get_all_GioHang
+------------------------------------------SearchSP_theoSize-------------------------------------------------------------------
+select*from SanPhams
+select*from Size
+exec Search_sp_TheoSize N'Áo sơ mi 1', '3'
+drop proc Search_sp_TheoSize
+
+
+alter proc Search_sp_TheoSize( @TenSP nvarchar(250),
+									   @MaSize int)
+as
+begin
+	select s.MaSanPham,s.MaChuyenMuc,s.TenSanPham,s.AnhDaiDien,s.Gia,s.SoLuong,s.MaSize,sz.TenSize
+	from SanPhams s inner join Size sz on s.MaSize=sz.MaSize 
+	where ( @TenSP = '' Or s.TenSanPham like N'%'+ @TenSP+'%') and
+							(@MaSize = s.MaSize)
+end 
+select*from SanPhams
+
+	exec USer_SanPham_search '1','12',N'Áo','',0,100000
+{
+  "page": "1",
+  "pageSize": "5",
+  "TenSanPham": "Áo sơ mi",
+  "TenSize":"M",
+  "MinPrice":1,
+  "MaxPrice":100000
+}
+drop proc USer_SanPham_search
+
+alter PROCEDURE USer_SanPham_search (@page_index  INT, 
+                                       @page_size   INT,
+									   @TenSP nvarchar(250),
+									   @TenSize nvarchar(10),
+									   @MinPrice int,
+									   @MaxPrice int
+									   )
+AS
+    BEGIN
+        DECLARE @RecordCount BIGINT;
+        IF(@page_size <> 0)
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.MaSanPham ASC)) AS RowNumber, 
+                              h.MaSanPham,
+							  h.MaChuyenMuc,
+							  c.TenChuyenMuc,
+							  h.TenSanPham,
+							  h.AnhDaiDien,
+							  h.MaSize,
+							  s.TenSize,
+							  h.Gia,
+							  h.SoLuong
+							
+                        INTO #Results1
+                        FROM SanPhams  h
+						inner join ChuyenMucs c on c.MaChuyenMuc = h.MaChuyenMuc
+						inner join Size s on s.MaSize = h.MaSize
+					    where
+							(@TenSP = '' Or h.TenSanPham like N'%'+@TenSP+'%') and
+							(@TenSize = '' Or s.TenSize like N'%'+@TenSize+'%') 
+							and	(@MinPrice =0  or h.Gia >= @MinPrice)
+							and(@MaxPrice =0  or h.Gia <= @MaxPrice)
+                        SELECT @RecordCount = COUNT(*)
+                        FROM #Results1;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results1
+                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
+                              OR @page_index = -1;
+                        DROP TABLE #Results1; 
+            END;
+            ELSE
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.MaSanPham ASC)) AS RowNumber, 
+                              h.MaSanPham,
+							  h.MaChuyenMuc,
+							  c.TenChuyenMuc,
+							  h.TenSanPham,
+							  h.AnhDaiDien,
+							  h.MaSize,
+							  s.TenSize,
+							  h.Gia,
+							  h.SoLuong
+                        INTO #Results2
+                        FROM SanPhams  h
+						inner join ChuyenMucs c on c.MaChuyenMuc = h.MaChuyenMuc
+						inner join Size s on s.MaSize = h.MaSize
+						 where
+							(@TenSP = '' Or h.TenSanPham like N'%'+@TenSP+'%') and
+							(@TenSize = '' Or s.TenSize like N'%'+@TenSize+'%') 
+							and	(@MinPrice =0  or h.Gia >= @MinPrice)
+							and(@MaxPrice =0  or h.Gia <= @MaxPrice)
+						SELECT @RecordCount = COUNT(*)
+                        FROM #Results2;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results2                        
+                        DROP TABLE #Results2; 
+        END;
+    END;
+
+--------------------------------------DatHang-----------------------------------------------------------------
+select*from KhachHang
+select*from HoaDons
+select*from ChiTietHoaDons
+select*from SanPhams
+select*from Size
+delete KhachHang
+delete HoaDons
+delete ChiTietHoaDons
+--create proc Search_MaKH( @TenKH nvarchar(250),@DiaChi nvarchar(250),@SDT nvarchar(11))
+--as
+--begin
+--	select*
+--	from KhachHang k 
+--	where k.TenKH=@TenKH and k.DiaChi=@DiaChi and k.SDT=@SDT
+--end 
+--exec Search_MaKH 'a','a','a'
+--select*from SanPhams
+
+select*from ChuyenMucs
+select s.MaSanPham
+from SanPhams s
+where s.MaChuyenMuc=4
+
+CREATE PROCEDURE sp_create_KhachHang_va_HoaDon (
+    @TenKH NVARCHAR(50),
+    @diachi NVARCHAR(250),
+    @sdt NVARCHAR(50),
+    @TrangThai BIT,
+    @NgayTao DATETIME,
+    @DiaChiGiaoHang NVARCHAR(250),
+    @TongGia FLOAT,
+    @list_json_chitiethoadon NVARCHAR(MAX)
+)
+AS
+BEGIN
+    DECLARE @MaKH INT;
+
+    -- Tạo khách hàng mới và lưu mã khách hàng vào @MaKH
+    INSERT INTO KhachHang (TenKH, DiaChi, SDT)
+    VALUES (@TenKH, @diachi, @sdt);
+
+    -- Lấy MaKH của khách hàng vừa tạo
+    SET @MaKH = SCOPE_IDENTITY();
+
+    -- Tạo hóa đơn bán với mã khách hàng vừa tạo
+    INSERT INTO HoaDons (TrangThai, NgayTao, TongGia, DiaChiGiaoHang, MaKH)
+    VALUES (@TrangThai, @NgayTao, @TongGia, @DiaChiGiaoHang, @MaKH);
+
+    DECLARE @MaHoaDon INT;
+    SET @MaHoaDon = SCOPE_IDENTITY();
+
+    -- Thêm các chi tiết hóa đơn
+    IF (@list_json_chitiethoadon IS NOT NULL)
+    BEGIN
+        INSERT INTO ChiTietHoaDons (MaSanPham, MaHoaDon, SoLuong, TongGia, GiamGia)
+        SELECT JSON_VALUE(p.value, '$.maSanPham'), @MaHoaDon, JSON_VALUE(p.value, '$.soLuong'), JSON_VALUE(p.value, '$.tongGia'), JSON_VALUE(p.value, '$.giamGia')
+        FROM OPENJSON(@list_json_chitiethoadon) AS p;
+    END;
+
+    SELECT @MaKH AS 'MaKH', @MaHoaDon AS 'MaHoaDon'; -- Trả về MaKH và MaHoaDon
+END;
+
+{
+
+  "tenKH": "Vũ Đình Vinh",
+  "diaChi": "Hải Dương",
+  "sdt": "0865087460",
+ 
+  "trangThai": true,
+  "ngayTao": "2023-11-27T10:21:09.515Z",
+  "diaChiGiaoHang": "Hải Dương",
+  "tongGia": 100000,
+  "list_json_ChiTietHD": [
+    {
+	
+    
+      "maSanPham": 110,
+      "soLuong": 5,
+      "tongGia": 100000,
+      "giamGia": "string",
+      "status": 0
+    }
+  ]
+}
+---------------------------------------------------------Admin_ThongKe---------------------------------------------------------------------
+select*from TaiKhoan
+select*from LoaiTaiKhoan
+select*from ChiTietTaiKhoan
+
+select*from SanPhams
+select*from KhachHang
+
+select*from HoaDons
+select*from ChiTietHoaDons
+exec [sp_thong_ke_khachhang] '1','100','','2023/11/26','2023/12/01'
+
 {
   "page": "1",
   "pageSize": "10",
-  "MaChuyenMuc": "2"
+  "TenKhach": "",
+  "fr_NgayTao":"2023/11/29",
+  "to_NgayTao":"2023/11/30"
 }
-exec User_SP_Search_ChuyenMuc '1','10',1
+alter PROCEDURE [dbo].[sp_thong_ke_khachhang] (@page_index  INT, 
+                                       @page_size   INT,
+									   @ten_khach Nvarchar(50),
+									   @fr_NgayTao datetime, 
+									   @to_NgayTao datetime
+									   )
+AS
+    BEGIN
+        DECLARE @RecordCount BIGINT;
+        IF(@page_size <> 0)
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.NgayTao ASC)) AS RowNumber, 
+                              s.MaSanPham,
+							  s.TenSanPham,
+							  c.SoLuong,
+							  c.TongGia,
+							  h.NgayTao,
+							  kh.TenKH,
+							  kh.Diachi
+                        INTO #Results1
+                        FROM HoaDons  h
+						inner join ChiTietHoaDons c on c.MaHoaDon = h.MaHoaDon
+						inner join SanPhams s on s.MaSanPham = c.MaSanPham 
+						inner join KhachHang kh on h.MaKH=kh.MaKH
+					    WHERE  (@ten_khach = '' Or kh.TenKH like N'%'+@ten_khach+'%') and						
+							h.NgayTao >= @fr_NgayTao AND h.NgayTao <= DATEADD(day, 1, @to_NgayTao);             
+                        SELECT @RecordCount = COUNT(*)
+                        FROM #Results1;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results1
+                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
+                              OR @page_index = -1;
+                        DROP TABLE #Results1; 
+            END;
+            ELSE
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY h.NgayTao ASC)) AS RowNumber, 
+                              s.MaSanPham,
+							  s.TenSanPham,
+							  c.SoLuong,
+							  c.TongGia,
+							  h.NgayTao,
+							  kh.TenKH,
+							  kh.Diachi
+                        INTO #Results2
+                        FROM HoaDons  h
+						inner join ChiTietHoaDons c on c.MaHoaDon = h.MaHoaDon
+						inner join SanPhams s on s.MaSanPham = c.MaSanPham
+						inner join KhachHang kh on h.MaKH=kh.MaKH
+					    WHERE  (@ten_khach = '' Or kh.TenKH like N'%'+@ten_khach+'%') and						
+						h.NgayTao >= @fr_NgayTao AND h.NgayTao <= DATEADD(day, 1, @to_NgayTao);
+						SELECT @RecordCount = COUNT(*)
+                        FROM #Results2;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results2                        
+                        DROP TABLE #Results2; 
+        END;
+    END;
+
+select*from HoaDons
+select*from ChiTietHoaDons
+exec ThongKeDoanhThu '2023/11/29','2023/12/01'
+alter PROCEDURE ThongKeDoanhThu
+    @from_Ngay DATETIME,
+    @to_Ngay DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        --N'Tổng' AS Ngay,
+        COUNT( h.MaHoaDon) AS SoDonHang,
+        SUM(h.TongGia) AS DoanhThu,
+		sum(c.SoLuong) as SoLuongSP
+    FROM 
+        HoaDons h inner join ChiTietHoaDons c on h.MaHoaDon=c.MaHoaDon
+    WHERE 
+         h.NgayTao >= @from_Ngay AND h.NgayTao <= DATEADD(day, 1, @to_Ngay);
+END;
+select*from HoaDons
+select*from ChiTietHoaDons
+
+exec Admin_Selling_Products '1','10','2023-11-29','2023-12-01'
+
+alter PROCEDURE Admin_Selling_Products (@page_index  INT, 
+                                       @page_size   INT,
+									   @fr_NgayTao datetime, 
+									   @to_NgayTao datetime
+									   )
+AS
+    BEGIN
+        DECLARE @RecordCount BIGINT;
+        IF(@page_size <> 0)
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY SUM(c.SoLuong) DESC)) AS RowNumber, 
+						      s.MaSanPham,
+							  s.TenSanPham,
+							  s.AnhDaiDien,
+							  SUM(c.SoLuong) AS TongSoLuong,
+							  sz.TenSize,
+							  s.Gia,
+							  h.NgayTao
+							 
+                        INTO #Results1
+                        FROM HoaDons  h
+						inner join ChiTietHoaDons c on c.MaHoaDon = h.MaHoaDon
+						inner join SanPhams s on s.MaSanPham = c.MaSanPham
+						inner join Size sz on s.MaSize=sz.MaSize
+					    WHERE  						
+						((@fr_NgayTao IS NULL
+                        AND @to_NgayTao IS NULL)
+                        OR (@fr_NgayTao IS NOT NULL
+                            AND @to_NgayTao IS NULL
+                            AND h.NgayTao >= @fr_NgayTao)
+                        OR (@fr_NgayTao IS NULL
+                            AND @to_NgayTao IS NOT NULL
+                            AND h.NgayTao <= @to_NgayTao)
+                        OR h.NgayTao >= @fr_NgayTao AND h.NgayTao <= DATEADD(day, 1, @to_NgayTao))  
+						GROUP BY s.MaSanPham, s.TenSanPham, s.AnhDaiDien, s.Gia, h.NgayTao,sz.TenSize
+                        SELECT @RecordCount = COUNT(*)
+                        FROM #Results1;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results1
+                        WHERE ROWNUMBER BETWEEN(@page_index - 1) * @page_size + 1 AND(((@page_index - 1) * @page_size + 1) + @page_size) - 1
+                              OR @page_index = -1;
+                        DROP TABLE #Results1; 
+            END;
+            ELSE
+            BEGIN
+						SET NOCOUNT ON;
+                        SELECT(ROW_NUMBER() OVER(
+                              ORDER BY SUM(c.SoLuong) DESC)) AS RowNumber, 
+                              s.MaSanPham,
+							  s.TenSanPham,
+							  s.AnhDaiDien,
+							  SUM(c.SoLuong) AS TongSoLuong,
+							   sz.TenSize,
+							  s.Gia,
+							  h.NgayTao
+                        INTO #Results2
+                        FROM HoaDons  h
+						inner join ChiTietHoaDons c on c.MaHoaDon = h.MaHoaDon
+						inner join SanPhams s on s.MaSanPham = c.MaSanPham
+						inner join Size sz on s.MaSize=sz.MaSize
+					    WHERE  					
+						((@fr_NgayTao IS NULL
+                        AND @to_NgayTao IS NULL)
+                        OR (@fr_NgayTao IS NOT NULL
+                            AND @to_NgayTao IS NULL
+                            AND h.NgayTao >= @fr_NgayTao)
+                        OR (@fr_NgayTao IS NULL
+                            AND @to_NgayTao IS NOT NULL
+                            AND h.NgayTao <= @to_NgayTao)
+                        OR h.NgayTao >= @fr_NgayTao AND h.NgayTao <= DATEADD(day, 1, @to_NgayTao))
+						GROUP BY s.MaSanPham, s.TenSanPham, s.AnhDaiDien, s.Gia, h.NgayTao,sz.TenSize
+						SELECT @RecordCount = COUNT(*)
+                        FROM #Results2;
+                        SELECT *, 
+                               @RecordCount AS RecordCount
+                        FROM #Results2                        
+                        DROP TABLE #Results2; 
+        END;
+    END;
+
+{
+  "page": "1",
+  "pageSize": "10",
+  "fr_NgayTao": "2023/11/29",
+  "to_NgayTao": "2023/12/01"
+}

@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
     <link rel="stylesheet" href="./css/giohang.css">
+    <script src="./jquery/jquery.2.1.1.min.js"></script>
     <title>Document</title>
 </head>
-<body>
+<body ng-app="GioHang" ng-controller="GioHangController">
     <div id="giohang">
         <div class="header1">
            
@@ -121,29 +122,29 @@
             </ul>
         </div>
 
-        <div class="content">
+        <div class="content" >
             <div class="content-left">
                 <form action="">
                     <legend>Thông tin liên hệ giao hàng</legend>
                     <div class="form-group">
                         <label for="">Họ và tên*</label>
                         <div class="form-group-input">
-                            <input type="text" class="content-left-input">
+                            <input ng-model="tenKH" type="text" class="content-left-input">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="">Email</label>
                         <div class="form-group-input">
                             <input type="email" name="email" id="email" placeholder="Không bắt buộc" class="content-left-input">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="">Số điện thoại</label>
                         <div class="form-group-input">
-                            <input type="text" class="content-left-input">
+                            <input ng-model="sdt" type="text" class="content-left-input">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="">Cách thức nhận hàng</label>
                         <div class="form-group-input-div">
                             
@@ -153,12 +154,12 @@
                             </select>
                         </div>
                         
-                    </div>
+                    </div> -->
                 </form>
 
-                <form action="">
+                <form >
                     <legend>Địa chỉ giao hàng</legend>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="">Chọn tỉnh thành*</label>
                         <div class="form-group-input-div">
                             <select name="" id="">
@@ -191,17 +192,18 @@
                         <div class="form-group-input">
                             <input type="text" class="content-left-input">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                        <label for="">Ghi chú</label>
+                        <label for="">Địa chỉ</label>
                         <div class="form-group-input">
-                            <textarea name="" id="" cols="49" rows="3" style="outline-color:rgb(150, 179, 225);"></textarea>
+                            <!-- <textarea name="" id="" cols="49" rows="3" style="outline-color:rgb(150, 179, 225);"></textarea> -->
+                            <input ng-model="diaChi" type="text">
                         </div>
                     </div>
                    
                 </form>
 
-                <form action="" style="margin-top: 30px;">
+                <form  style="margin-top: 30px;">
                     <legend>Hình thức thanh toán</legend>
                     <div class="thanh_toan">
                         <label for="" class="COD">
@@ -224,11 +226,11 @@
                             </div>
                         </label>
                     </div>
-                    <button class="thanh-toan">THANH TOÁN</button>
+                    <button ng-click="CreateHD()" class="thanh-toan">THANH TOÁN</button>
                 </form>
             </div>
-            <div class="content-right">
-                <form action="">
+            <div class="content-right" >
+                <form >
                     <legend>Giỏ hàng của bạn</legend>
                     <table  class="content-right-giohang">
                         <thead>
@@ -242,20 +244,44 @@
                                 <th style="width: 50px;">Xóa</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 5px;"><img src="./anh/chitietsanpham1.1.jpg" style="width: 50px;"></td>
-                                <td><p><span class="TTSP">Áo Khoác Dạ Regular Phối sọc AK405 Màu Be</span></p></td>
-                                <td><input class="sl" type="number" value="1" min="0"></td>
+                        <tbody class="parentListCart" >    
+                           
+                            <!-- <tr id="listCart" >
+                               
+                                <td style="padding: 5px;"><img src="./anh/admin.png" style="width: 50px;"></td>
+                                <td ng-model="tenSanPham"><p><span class="TTSP">cdsscdcd</span></p></td>
+                                <td style="display: flex;">
+                                    <div ><button class="tang" type="button">+</button></div>
+                                    <input style="" class="sl" type="text" value="1" min="0" >
+                                    <div ><button class="giam" type="button">-</button></div>
+                                </td>
                                 
-                                <td><select name="" id="" class="size">
-                                    <option value="">S</option>
-                                    <option value="">M</option>
-                                    <option value="">L</option>
-                                </select></td>
-                                <td> <p><span class="gia">320.000</span></p></td>
+                                <td>
+                                    <select name="" id="" class="size" ng>
+                                        <option ng-repeat="x in listSize"  value="{{x.maSize}}">{{x.tenSize}}</option>
+                                    </select>
+                                </td>
+                                <td> <p><span class="gia">200000</span></p></td>
                                 <td><button class="xoa">Xóa</button></td>
+                            </tr> -->
+                            <tr ng-repeat="value in listItemBuy">
+                                <td><img src="{{value.img}}" style="width: 50px;"></td>
+                                <td><p><span class="TTSP">{{value.name}}</span></p></td>
+                                <td style="display: flex; margin-top: 25px;">
+                                    <div><button ng-click="tangsl($index)" style="width: 18px;" class="tang" type="button">+</button></div>
+                                    <input style="text-align: center;" class="sl" type="text" ng-model="value.amount" min="1">
+                                    <div><button ng-click="giamsl($index)" style="width: 18px;" class="giam" type="button">-</button></div>
+                                </td>
+                                <td>
+                                    <select name="" id="" class="size" ng>
+                                        <option value="{{value.size}}">{{value.namesize}}</option>
+                                    </select>
+                                </td>
+                                <td><p><span class="gia">{{value.price}}</span></p></td>
+                                <td><button ng-click="xoaSanPham(value.maSP)" class="xoa">Xóa</button></td>
                             </tr>
+                            
+                            
                         </tbody>
                     </table>
                 </form> 
@@ -271,22 +297,22 @@
                     </div>
                     
                 </form>
-                <form action="">
-                    <legend>Tổng:</legend>
-                    <div style="width: 100%;height: 30px;font-size: 14px; border-bottom: 1px solid gray;padding: 5px;">Số tiền mua sản phẩm:
-                        <span style="float: right;">490.000</span>
-                    </div>
+                <form >
+                    <!-- <div style="width: 100%;height: 30px;font-size: 14px; border-bottom: 1px solid gray;padding: 5px;">Số tiền mua sản phẩm:
+                        <span class="totalProduct" style="float: right;"></span>
+                    </div> -->
                     <div style="width: 100%;height: 30px;font-size: 14px; border-bottom: 1px solid gray;padding: 5px;">Chi tiết giảm giá</div>
-                    <div style="width: 100%;height: 30px;font-size: 14px; border-bottom: 1px solid gray;padding: 5px;font-weight: bold;margin-top: 15px;">
+                    <!-- <div style="width: 100%;height: 30px;font-size: 14px; border-bottom: 1px solid gray;padding: 5px;font-weight: bold;margin-top: 15px;">
                         Vận chuyển
                     </div>
                     <div style="width: 100%;height: 30px;font-size: 12px;padding: 5px;margin: 0px 0px 20px 10px;">
                         Tổng trọng lượng sản phẩm: 400Gram
-                    </div>
-                    <div style="width: 100%;height: 30px;font-size: 14px; border-top: 1px solid gray;padding: 5px;font-weight: bold;">
+                    </div> -->
+                    <div class="tongcong" style="width: 100%;height: 30px;font-size: 14px; border-top: 1px solid gray;padding: 5px;font-weight: bold;">
                         Tổng tiền thanh toán
-                        <span style="float: right;">490.500</span>
+                        <span  style="float: right;">{{ tinhTongTien() }}</span>
                     </div>
+                    
                 </form>
             </div>
         </div>
@@ -404,6 +430,8 @@
             
         </div>
     </div>
-    <script src="giohang.js"></script>
+    <script src="./angular/angular.min.js"></script>
+    <script src="./angular/AGL_GioHang.js"></script>
+    <script src="./angular/global2.js"></script>
 </body>
 </html>

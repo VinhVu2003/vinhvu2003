@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer;
 using DataModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,7 +46,7 @@ namespace API_BTL.Controllers
         }
 
 
-
+        [Authorize]
         [Route("NhaPhanPhoi_Search")]
         [HttpPost]
         public IActionResult Search([FromBody] Dictionary<string, object> formData)

@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/aonam.css">
     <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
-    <script src="./angular/admin.js"></script>
+    
     <!-- <script src="./angular/ChiTietSanPham.js"></script> -->
     <title>4MENSHOP-AoNam</title>
 </head>
-<body ng-app ="AppBanHang" ng-controller ="SanPhamCtrl">
+<body ng-app ="User_ChuyenMuc" ng-controller ="ChuyenMucCtrl">
     <div class="aonam" >
         <div class="header1">
            
@@ -32,7 +32,7 @@
             <a href="trangchu.html"><img class="logo" src="./anh/banner2.png" alt=""></a>
         
             
-            <div class="header2div">
+            <div class="header2div" >
                 <ul class="banner2ul">
                     <li>
                         <div>
@@ -58,13 +58,13 @@
                     </li>
                     <li><a href="">ÁO NAM</a>
                         <ul class="sub-banner2ul">
-                            <li><a href="">Áo sơ mi</a></li>
-                            <li><a href="">Áo thun</a></li>
-                            <li><a href="">Áo polo</a></li>
-                            <li><a href="">Áo khoác</a></li>
-                            <li><a href="">Áo len</a></li>
-                            <li><a href="">Áo vest</a></li>
-                            <li><a href="">Áo ghi lê</a></li>
+                            <li><a ng-click="chuyenmuc_aosomi()" >Áo sơ mi</a></li>
+                            <li><a ng-click="chuyenmuc_aothun()" >Áo thun</a></li>
+                            <li><a ng-click="chuyenmuc_aopolo()" href="">Áo polo</a></li>
+                            <li><a ng-click="chuyenmuc_aokhoac()" href="">Áo khoác</a></li>
+                            <li><a ng-click="chuyenmuc_aolen()" href="" href="">Áo len</a></li>
+                            <li><a ng-click="chuyenmuc_aovest()" href="" href="">Áo vest</a></li>
+                            <li><a ng-click="chuyenmuc_aoghile()" href="" href="">Áo ghi lê</a></li>
                             <li><a href="">Áo Hoodie & Sweatshirt</a></li>
                         </ul>
                     </li>
@@ -127,7 +127,14 @@
 
         <div class="bottom">
             <div class="botom-left">
-                <h1>ÁO NAM</h1>
+                <h1 ng-if="MaCM === 1">Áo sơ mi</h1>
+                <h1 ng-if="MaCM === 2">Áo thun</h1>
+                <h1 ng-if="MaCM === 3">Áo polo</h1>
+                <h1 ng-if="MaCM === 4">Áo khoác</h1>
+                <h1 ng-if="MaCM === 5">Áo len</h1>
+                <h1 ng-if="MaCM === 6">Áo vest</h1>
+                <h1 ng-if="MaCM === 7">Áo ghi lê</h1>
+                
             </div>
 
             <div class="bottom-right">
@@ -157,14 +164,14 @@
         <div>
             <div class="content-left">
 
-                <div class="contentsmall" ng-repeat = "x in " >
-                    <div class="productimg" ng-click="product(x)">
+                <div class="contentsmall" ng-repeat="x in listSanPham" >
+                    <div class="productimg" >
                         <div class="productimgpig">
                             <div style="width: 100%;height: 100%; position: absolute;">
                                 <a href=""><img src="{{x.anhDaiDien}}" alt=""></a>
-                                <div class="overlay" style="position: absolute;">
-                                    <div class="hoverlay-img"><a href=""><img src="{{x.anhDaiDien}}" alt=""></a></div>
-                                </div>
+                                <!-- <div class="overlay" style="position: absolute;">
+                                    <div class="hoverlay-img"><a href=""><img src="" alt=""></a></div>
+                                </div> -->
                                 <div class="overlayitem">
                                     <span class="overlayitemicon">
                                         <i class="fa-solid fa-cart-shopping" style="color: white;rotate: -20deg;"></i>
@@ -181,7 +188,7 @@
                                 <a href=""><img src="{{x.anhDaiDien}}" alt=""></a>
                         </div>
                         <div class="producttext" style="text-align: center;">
-                            <a href="" class="spannote" title="Áo Khoác Dạ Regular Phối sọc AK405 Màu Be" 
+                            <a ng-click="product(x)" href="" class="spannote" title="Áo Khoác Dạ Regular Phối sọc AK405 Màu Be" 
                             style="width: 100%;" >{{x.tenSanPham}}</a>
                         </div>
                         <div class="protect-money">
@@ -236,7 +243,7 @@
                     </div>
                 </div>
                 <div class="product-hot">
-                    <h5 style="font-size: 14px;color: #666666;">SẢN PHẨM HOT <hr style="
+                    <h5 style="font-size: 14px;color: #666666;">SẢN PHẨM MỚI<hr style="
                         width: 56%;
                         float: right;
                         padding: 0px;
@@ -246,26 +253,17 @@
                         border: 0px;
                         margin-top: 8px;
                     " > </h5>
-                    <div class="product-hot-content">
+
+                    <div class="product-hot-content" ng-repeat="x in listSanphamNew">
                         <div class="div-img">
-                            <img src="./anh/thoitrangmoinhat4.jpg" alt="">
+                            <img src="{{x.anhDaiDien}}" alt="">
                         </div>
                         <div class="div-information">
-                            <a href="">Áo Khoác Dạ Regular Phối sọc AK405 Màu Be</a>
-                            <p style="color:brown;font-size: 16px;">545.000</p>
+                            <a href="">{{x.tenSanPham}}</a>
+                            <p style="color:brown;font-size: 16px;">{{x.gia}}</p>
                         </div>
                     </div>
-                    <div class="product-hot-content">
-                        <div class="div-img">
-                            <img src="./anh/Thoitrangmoinhat1.1.jpg" alt="">
-                        </div>
-                        <div class="div-information">
-                            <a href="./chitietsanpham.html">Áo Khoác Da Lộn Regulan Phối Màu AK047 Màu Bò</a>
-                            <p style="color:brown;font-size: 16px;">545.000
-                                <span style="font-size: 13px;color:#666;">35.000</span>
-                            </p>
-                        </div>
-                    </div>
+                    
                 </div>
                 
             </div>
@@ -411,5 +409,6 @@
 <script src="./angular/angular.min.js"></script>
     <script src="./angular/global.js"></script>
     <script src="./angular/admin.js"></script>
+    <script src="./angular/agl_use_chuyenmuc.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </html>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataModel;
 using DataAccessLayer;
-namespace BusinessLogicLayer.Interfaces
+namespace BusinessLogicLayer
 {
     public partial interface IKhachBusiness
     {

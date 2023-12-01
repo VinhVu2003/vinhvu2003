@@ -18,6 +18,9 @@ function next(){
     if(index==2){
         index=0;
     }
+    if(index<0){
+        index=0;
+    }
 }
 
 function prev(){
@@ -37,6 +40,7 @@ const btn = document.querySelectorAll('.overlayitemicon')
 btn.forEach(function(overlayitemicon,index){
     // console.log(overlayitem,index)
     overlayitemicon.addEventListener("click",function(event){{
+        // console.log("abc")
         var btnItem = event.target
         
         var product = btnItem.parentElement.parentElement.parentElement.parentElement.parentElement
@@ -52,6 +56,7 @@ btn.forEach(function(overlayitemicon,index){
         
       //    console.log(productName,productPrice,productImg)
         addcart(productPrice,productName,productImg)
+        alert("Thêm giỏ sản phẩm vào giỏ hàng thành công")
         
     }   
     })
@@ -172,15 +177,29 @@ window.addEventListener("scroll",() =>{
 
 //giohang
 
-var icon = document.querySelector('.fa-cart-shopping')
-var content = document.querySelector('.giohang')
-content.style.display='none'
+// var icon = document.querySelector('.banner2span')
+// var content = document.querySelector('.giohang')
+// content.style.display='none'
+// icon.addEventListener('click',function(){
+//     if(content.style.display === 'none'){
+//         content.style.display = 'block'
+//     }
+//     else {
+//         content.style.display = 'none'   
+//     }
+
+// })
+
+
+//Search
+var icon = document.querySelector('.banner3span')
+var Search = document.querySelector('#Search')
 icon.addEventListener('click',function(){
-    if(content.style.display === 'none'){
-        content.style.display = 'block'
+    if(Search.style.display === 'none'){
+        Search.style.display = 'block'
     }
     else {
-        content.style.display = 'none'   
+        Search.style.display = 'none'   
     }
 
 })

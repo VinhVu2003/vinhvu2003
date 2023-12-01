@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/admin_ThongKe.css">
+    <link rel="stylesheet" href="./anh/fontawesome-free-6.4.0-web/css/all.css">
+    <title>4MenShop</title>
+</head> 
+
+<body ng-app ="ThongKe" ng-controller ="ThongKeController">
+    <div class="admin">
+        <div class="header1">
+
+            <div class="left">
+                <i class="fa-solid fa-phone" style="color: white;"></i>
+                &nbsp; Hotline:
+                <a href="tel:0868444644" title="4MEN Hot Line" rel="nofollow">0868.444.644</a>
+            </div>
+            <div class="right">
+                <ul>
+                    <li><a href="">Cách chọn size</a></li>
+                    <li><a href="">Chính sách khách vip</a></li>
+                    <li><a href="">Giới thiệu</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header2">
+            <a href="trangchu.html"><img class="logo" src="./anh/banner2.png" alt=""></a>
+
+            <!-- <div id="ThemSanPham">
+                <h4 style="margin: 10px;">Thêm sản phẩm <a href="#"></a></h4>
+                <button id="esc" ng-click="ESC()" >X</button>
+                <hr>
+                <div id="form_dien_SP">
+                    <form >
+                        <div id="div_MaSP">
+                            <label for="">Mã sản phẩm</label>
+                            <div class="Ma_SP">
+                                <input ng-model="maSanPham" type="text" placeholder="" class="Ma_SP_input" readonly>
+                            </div>
+                        </div>
+
+                        <div class="Ten_SP">
+                            <label for="">Tên sản phẩm</label>
+                            <div class="Ma_SP">
+                                <input ng-model="tenSanPham" type="text" placeholder="" class="Ma_SP_input">
+                            </div>
+                        </div>
+
+                        <div class="Ma_Chuyen_Muc">
+                            <label for="">Mã chuyên mục</label>
+                            <select ng-model="maChuyenMuc" style="width: 100%;" class="chosen-select" data-placeholder="Choose a Country...">
+                                <option ng-repeat="x in listChuyenMuc"  value="{{x.maChuyenMuc}}">{{x.tenChuyenMuc}}</option>
+
+                            </select>
+                        </div>
+                       
+        
+                        <div class="Gia_SP">
+                            <label for="">Giá</label>
+                            <div class="Gia_SP">
+                                <input ng-model="gia" type="" placeholder="" class="Gia_SP_input">
+                            </div>
+                        </div>
+        
+                        <div class="Size_SP">
+                            <label for="">Size</label>
+                            <div class="Size_SP">
+                                <select ng-model="maSize" style="width: 100%;" class="chosen-select" data-placeholder="Choose a Country...">
+                                    <option ng-repeat="x in listSize"  value="{{x.maSize}}">{{x.tenSize}}</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="SLuong_SP">
+                            <label for="">Số lượng</label>
+                            <div class="SLuong_SP">
+                                <input ng-model="soLuong" type="text" class="SLuong_SP_input">
+                            </div>
+                        </div>
+                        <div class="anh" style="margin-bottom: 10px;">
+                            <label for=""> Ảnh</label>
+                            <div class="">
+                                <input id="upload_Img" ng-model="anhDaiDien" type="file" class="SLuog_SP_input">
+                                <img  style="width: 50px;float: right;margin-right: 47px;margin-top: -10px;" 
+                                    src="{{anhDaiDien}}" alt="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        
+                
+        
+               
+                <button ng-click="Save()" class="">{{submit}}</button>
+            </div> -->
+
+            <div class="banner2right">
+                <div class="b1">
+                    <div class="content-logo">
+                        <a href="">
+                            <img src="./anh/admin.png" alt="">
+                        </a>
+                        <p id="VDV">Vũ Đình Vinh</p>
+                    </div>
+                    
+                    <span class="banner2span">
+                        <a href="./Login.html"><i class="fa-solid fa-right-to-bracket"></i> </a>
+                    </span>
+                </div>
+                <!-- <div class="b1">
+                    <span class="banner2span"><i class="fa-solid fa-magnifying-glass" style="color: brown;"></i></span>
+                </div> -->
+
+            </div>
+
+        </div>
+
+        <div class="botom-head">
+            <ul >
+                <li><a href="">4MEN &nbsp; / &nbsp;</a></li>
+                <li><a href="">Trang quản trị &nbsp; / &nbsp; Thống kê</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="content-left">
+                <!-- <div class="content-logo">
+                    <a href="">
+                        <img src="./anh/admin.png" alt="">
+                    </a>
+                    <p>Vũ Đình Vinh</p>
+                </div> -->
+                <div class="content-menu">
+                    <ul class="menu-baiviet" onclick="toggleMenu()">
+                        <li id="baiviet" style="color: #eee;">
+                            <i class="fa-solid fa-book"></i>
+                            Bài viết giới thiệu
+                        </li>
+                        <ul class="baiviet-list" >
+                            <li><a href="">Đăng bài viết</a></li>
+                            <li><a href="">Danh sách bài viết</a></li>
+                        </ul>
+                    </ul>
+
+
+                    <ul class="menu-sanpham">
+                        <li style="color: #eee;">
+                            <i class="fa-solid fa-bars"></i>
+                            Quản lí sản phẩm
+                        </li>
+                        <ul class="sanpham-list">
+                            <li ><a href="./admin_chuyen_muc.html">Chủng loại-Ngành hàng</a></li>
+                            <li ><a href="./admin_nha_phan_phoi.html">Nhà phân phối</a></li>
+                            <li ><a href="./admin.html">Sản phẩm </a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-khachhang">
+                        <li style="color: #eee;">
+                            <i class="fa-solid fa-people-group"></i>
+                                Quản lí khách hàng
+                        </li>
+                        <ul class="khachhang-list">
+                         
+                            <li><a href="./adm_KhachHang.html">Khách hàng</a></li>
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-donhang">
+                        <li style="color: #eee;">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            Quản lí đơn hàng
+                        </li>
+                        <ul class="donhang-list">
+                            <li><a href="">Đơn hàng nhập</a></li>
+                            <li ><a href="./adm_HDB.html">Đơn hàng bán</a></li>
+                            <li><a href="">Đang giao cho khách</a></li>
+                            <li><a href="">Đã giao thành công</a></li>
+                            <!-- <li><a href="">Đơn hàng bị hủy</a></li> -->
+                        </ul>
+                    </ul>
+
+                    <ul class="menu-nhanvien">
+                        <li style="color: #eee;">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            Thống kê
+                        </li>
+                        <ul class="donhang-list" >
+                            <li style="background-color: brown;"><a href="./admin_ThongKe.html">Thống kê dữ liệu</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-right" >
+                <div class="bt-head" >
+                    <table >
+                        <button ng-click="reloadPage()" style="position: absolute;right: 120px; padding: 4px;"><i class="fa-solid fa-arrows-rotate"></i> &nbsp;Làm mới</button>
+                        <tr>
+                            <td>
+                                <p>Ngày bắt đầu</p>
+                                <input ng-model="fr_NgayTao" type="date">
+                            </td>
+                            <td>
+                                <p>Ngày kết thúc</p>
+                                <input ng-model="to_NgayTao" type="date">
+                            </td>
+                            
+                            <td>
+                                <p>Tên khách hàng</p>
+                                <input ng-model="tenkhach" type="text" style="width: 117px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="nutThem" ng-click="ThongKeDoanhThu()" type="button" >
+                                   Thống kê <br>doanh thu
+                                </button>
+                            </td>
+                            <td>
+                                <button id="nutThem" ng-click="ThongKeSPBanChay()" type="button" >
+                                    Sản phẩm<br> bán chạy
+                                </button>
+                            </td>
+                            <!-- <td>
+                                <button id="nutThem" ng-click="" type="button" >
+                                    Sản phẩm<br> mới
+                                </button>
+                            </td> -->
+                            <td>
+                                <button id="nutThem" ng-click="ThongKeKhach()" type="button" >
+                                    Khách hàng
+                                </button>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </div>
+                
+                <div id="KQThongKeKhach" style="text-align: center;" ng-show="showDiv_Khach" ng-click="hideDiv_Khach($event)">
+                    <h3 style="margin-bottom: 10px;">Kết quả</h3>
+                   
+                    <table class="table-sp" border="1" style="border-collapse: collapse;">
+                        <tr>
+                            <th>Tên khách hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Tổng giá</th>
+                            <th>Ngày tạo</th>
+                            
+                        </tr>
+                        <tr ng-repeat="x in listKhach">
+                            <td >{{x.tenKH}}</td>
+                            <td >{{x.diachi}}</td>
+                            <td >{{x.tenSanPham}}</td>
+                            <td >{{x.soLuong}}</td>
+                            <td >{{x.tongGia}}</td>
+                            <td >{{x.ngayTao}}</td>  
+                        </tr>
+                    </table>
+                </div>
+                <div id="KQThongKeDoanhThu" ng-show="showDiv" style="text-align: center;" ng-click="hideDiv($event)">
+                    <h3 style="margin-bottom: 10px;">Kết quả</h3>
+                    <div id="ThongKeDoanhThu" >
+                        <table  style="display: flex;justify-content: center; align-items: center;">
+                            <tr>
+                                <td>
+                                    <label>Số đơn hàng</label><br>
+                                    <input ng-model="SoDonHang" type="text" readonly style="width: 120px;height: 50px;text-align: center;">
+                                </td>
+                                <td>
+                                    <label>Doanh thu</label><br>
+                                    <input ng-model="DoanhThu" type="text" readonly style="width: 120px;height: 50px;text-align: center;">
+                                </td>
+                                <td>
+                                    <label>Sản phẩm đã bán</label><br>
+                                    <input ng-model="SLSanPham" type="text" readonly style="width: 120px;height: 50px;text-align: center;">
+                                </td>
+                            </tr>
+                            
+                            
+                        </table>
+                    </div>
+                </div>
+
+                <div id="KQThongKeSPBanChay" ng-show="showDiv_BanChay" style="text-align: center;" >
+                    <h3 style="margin-bottom: 10px;">Kết quả</h3>
+                    <div id="ThongKeDoanhThu" >
+                        <table  style="display: flex;justify-content: center; align-items: center;">
+                            
+                            <table class="table-sp" border="1" style="border-collapse: collapse;">
+                                <tr>
+                                    <th>Ảnh đại diện</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Size</th>
+                                    <th>Giá</th>
+                                    <!-- <th>Tổng giá</th> -->
+                                    <th>Số lượng bán</th>
+                                    
+                                </tr>
+                                <tr ng-repeat="x in listSPBanChay">
+                                    <td ><img src="{{x.anhDaiDien}}" alt=""></td>
+                                    <td >{{x.tenSanPham}}</td>
+                                    <td>{{x.tenSize}}</td>
+                                    <td >{{x.gia}}</td>
+                                    <td >{{x.tongSoLuong}}</td>  
+                                </tr>
+                            </table>
+                            
+                        </table>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-one" style="margin-left: 40px;">
+                <img type="image" src="https://4menshop.com/logo-footer.png?v=1" >
+                <ul class="footer-list" style="text-decoration: none;" >
+                    <li>
+                        <a href="" title="gioi thieu">Giới thiệu</a>
+                    </li>
+                    <li><a href="" title="lien he">Liên hệ</a></li>
+                    <li><a href="" title="tuyen dung">Tuyển dụng</a></li>
+                    <li><a href="" title="tin tuc 4MEN">Tin tức</a></li>
+                    <ul style="text-decoration: none; list-style: none;font-size: 14px;">
+                        <li>
+                            <i class="fa-regular fa-envelope"></i>
+                            Email: 
+                            <a href="" rel="" title="4MEN EMAIL">info@4menshop.com</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            Hotline: 
+                            <a href="tel:0868444644" title="4MEN HOTLINE">0868.444.644</a>
+                        </li>
+                        <div>
+                            <form class="newsletter" action="" method=""> 
+                                <label>	
+                                    Đăng ký nhận email khuyến mãi <br>
+                                    <input type="text" placeholder="Email của bạn" name="email"> 
+                                </label> 
+                                
+                                <button type="submit">
+                                    Đăng ký
+                                </button>
+                             </form>
+                        </div>
+                    </ul>
+                </ul>
+            </div>
+
+
+            <div class="footer-one">
+                <h5 class="footer-h5" style="color: #eee;"><a href="">Hỗ trợ khách hàng</a></h5>
+                <ul class="footer-list" style="text-decoration: none;" >
+                    <li>
+                        <a href="" title="gioi thieu">Hướng dẫn đặt hàng</a>
+                    </li>
+                    <li><a href="" title="lien he">Hướng dẫn chọn size</a></li>
+                    <li><a href="" title="tuyen dung">Câu hỏi thường gặp</a></li>
+                    <li><a href="" title="tin tuc 4MEN">Chính sách khách VIP</a></li>
+                    <li><a href="">Thanh toán - Giao hàng</a></li>
+                    <li><a href="">Chính sách đổi hàng</a></li>
+                    <li><a href="">Chính sách bảo mật</a></li>
+                    <li><a href="">Chính sách cookie</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-one-ggmap">
+                <h5 class="footer-h5" style="color: #eee;"><a href="">hệ thống cửa hàng</a></h5>
+                <a href="/cua-hang.html" title="cua hang"><img  type="image" src="https://4menshop.com/images/footer-map.jpg" alt="dang ky bo cong thuong" style="margin-bottom: 10px;" have-change="1"></a>
+                <ul class="footer-list" >
+                    <li>
+                        <a href="" title="gioi thieu" style="text-decoration: none; color: #666;font-size: 14px;">
+                            Tìm địa chỉ gần CỬA HÀNG gần bạn</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-one-ggmap">
+                <h5 class="footer-h5" style="color: #eee;"><a href="">Kết nối với 4MEN</a></h5>
+                <a href="/cua-hang.html" title="cua hang"><img  type="image" src="./anh/slideshow1.jpg" alt="dang ky bo cong thuong" style="margin-bottom: 10px;" have-change="1"></a>
+                <ul class="footer-list" >
+                    <li>
+                        <li>
+                             <a href="https://www.facebook.com/4men.com.vn" class="facebook" title="facebook page" rel="noreferrer" target="_blank"></a> 
+                        </li>  
+                        <li style="float: left;font-size: 23px;
+                        ;color: cornflowerblue;" >
+                            <i class="fa-brands fa-facebook"></i>
+                        </li>
+                        <li style="float: left;font-size: 23px;
+                        ">
+                            <img style="border-radius: 5px;width: 20px;height: 20px;" src="./anh/íntragram.jpg">
+                        </li>
+                        <lis style="float: left;margin-left:7px;font-size: 23px;
+                        ;color: red; display: flex;">
+                            <i class="fa-brands fa-youtube"></i>
+                        </li>
+                        <!-- <li><div class="fb-like fb_iframe_widget" data-href="https://4menshop.com/" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;font=arial&amp;href=https%3A%2F%2F4menshop.com%2F&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true&amp;width=100"><span style="vertical-align: bottom; width: 100px; height: 28px;"><iframe name="f1b2a34e4d987dc" width="100px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v2.4/plugins/like.php?app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df10f16ad1618a14%26domain%3D4menshop.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252F4menshop.com%252Ff3c70ad7c551ac%26relation%3Dparent.parent&amp;container_width=0&amp;font=arial&amp;href=https%3A%2F%2F4menshop.com%2F&amp;layout=button_count&amp;locale=vi_VN&amp;sdk=joey&amp;send=false&amp;share=true&amp;show_faces=true&amp;width=100" style="border: none; visibility: visible; width: 150px; height: 28px" class=""></iframe></span></div> </li>  -->
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>Copyright 2023 · Thiết kế và phát triển bởi <a href="https://4menshop.com/" title="4MEN SHOP">4MEN SHOP</a> All rights reserved</p>
+             
+                    <p class="line-top">
+                        Chủ quản: ông Nguyễn Ngọc Năm. <br>
+                        MST cá nhân: 0312028096 <br>
+                        Số ĐKKD: 41G8031109 do UBND Quận 7 - Tp.HCM cấp ngày 05/06/2017 
+                    </p>
+
+                 
+                    <p class="line-top f-brand" style="color: #ff0000;">Nhãn hiệu "4MEN" đã được đăng kí độc quyền tại Cục sở hữu trí tuệ Việt Nam</p>
+                   
+                </div>
+                <div class="footer-bottom-img"><a href=""><img src="./anh/footer-bottom.png"></a></div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script src="./angular/angular.min.js"></script>
+    <script src="./angular/global.js"></script>
+    <script src="./angular/agl_ThongKe.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script> 
+        // var user = JSON.parse(localStorage.getItem('user'));
+        
+        // if (!user) {
+        //     window.location.href = "Login.html";
+        // }
+        function toggleMenu() {
+            var baivietList = document.querySelector('.baiviet-list');
+            // Kiểm tra nếu lớp baiviet-list đã được thêm vào
+            if (baivietList.classList.contains('show')) {
+                baivietList.classList.remove('show'); // Loại bỏ lớp để ẩn đi
+            } else {
+                baivietList.classList.add('show'); // Thêm lớp để hiển thị
+            }
+        }
+        
+
+    </script>
+</body>
+</html>

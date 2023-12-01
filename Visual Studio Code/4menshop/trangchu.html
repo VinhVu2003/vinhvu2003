@@ -15,7 +15,7 @@
 
     <title>4MENSHOP</title>
 </head>
-<body>
+<body ng-app="TrangChu" ng-controller="TrangChuController">
     <div id="trangchu">
         <div class="header1">
            
@@ -61,15 +61,15 @@
                         </a>
                            
                         </li>
-                        <li><a href="aonam.html">ÁO NAM</a>
-                            <ul class="sub-banner2ul">
-                                <li><a href="">Áo sơ mi</a></li>
-                                <li><a href="">Áo thun</a></li>
-                                <li><a href="">Áo polo</a></li>
-                                <li><a href="">Áo khoác</a></li>
-                                <li><a href="">Áo len</a></li>
-                                <li><a href="">Áo vest</a></li>
-                                <li><a href="">Áo ghi lê</a></li>
+                        <li><a href="">ÁO NAM</a>
+                            <ul class="sub-banner2ul" >
+                                <li><a ng-click="chuyenmuc_aosomi()" >Áo sơ mi</a></li>
+                                <li><a ng-click="chuyenmuc_aothun()" >Áo thun</a></li>
+                                <li><a ng-click="chuyenmuc_aopolo()" href="">Áo polo</a></li>
+                                <li><a ng-click="chuyenmuc_aokhoac()" href="">Áo khoác</a></li>
+                                <li><a ng-click="chuyenmuc_aolen()" href="" href="">Áo len</a></li>
+                                <li><a ng-click="chuyenmuc_aovest()" href="" href="">Áo vest</a></li>
+                                <li><a ng-click="chuyenmuc_aoghile()" href="" href="">Áo ghi lê</a></li>
                                 <li><a href="">Áo Hoodie & Sweatshirt</a></li>
                             </ul>
                         </li>
@@ -110,8 +110,9 @@
                 <div class="banner2right">
                     <div class="b1">
                         <span class="banner2span">
-                            
-                            <a href="#"> <i class="fa-solid fa-cart-shopping" style="color: brown;" onclick="showgiohang()"></i></a>
+                            <a href="./giohang.html"> <i class="fa-solid fa-cart-shopping" style="color: brown;" ></i></a>
+
+                            <!-- <a href="./giohang.html"> <i class="fa-solid fa-cart-shopping" style="color: brown;" onclick="showgiohang()"></i></a> -->
                             <div class="giohang">
                                 <h4 style="margin: 10px;">Sản phẩm trong giỏ hàng</h4>
                                 <hr>
@@ -125,8 +126,12 @@
                         </span>
                         
                     </div>
+
                     <div class="b1">
-                        <span class="banner2span"><i class="fa-solid fa-magnifying-glass" style="color: brown;" ></i></span>
+                        <span class="banner3span"><i class="fa-solid fa-magnifying-glass" style="color: brown;"></i></span>
+                        <div class="inputContainer">
+                            <input ng-model="inputData" ng-keypress="checkEnterKey($event)" id="Search" type="text" placeholder="Tìm kiếm">
+                        </div>
                     </div>
     
                 </div>
@@ -140,28 +145,27 @@
         </div>
         <div class="content" ng-app="TrangChu" ng-controller="TrangChuController">
             <div class="product-hot" >
-                <h5 class="fashion-most-hot">thời trang bán chạy</h5>
+                <h5  class="fashion-most-hot" >thời trang bán chạy</h5>
                 <!-- <div class="hot"> -->
 
-                    <div class="contentsmall" ng-repeat="x in listSanphambanchay" ng-click="product(x)">
+                    <div class="contentsmall" ng-repeat="x in listSanphambanchay" >
                         <div class="productimg">
                             <div class="productimgpig">
                                 <a href=""><img src="{{x.anhDaiDien}}" alt=""></a>
                                 <div class="overlay" style="position: absolute;">
                                     <div class="hoverlay-img"><a href=""><img src="{{x.anhDaiDien}}" alt=""></a></div>
                                 </div>
-                                <div class="overlayitem">
-                                    <span class="overlayitemicon" >
+                                <div class="overlayitem" >
+                                    <span class="overlayitemicon" ng-click="cart()" >
                                         <i class="fa-solid fa-cart-shopping" style="color: white;rotate: -20deg;"></i>
                                     </span>
                                 </div>
                             </div>
-                            <div class="productimgsmall">
+                            <div class="productimgsmall" >
                                     <a href=""><img src="{{x.anhDaiDien}}" alt=""></a>
                             </div>
-                            <div class="producttext">
-                                
-                                <a href="" class="spannote" title="{{x.tenSanPhamS}}" >{{x.tenSanPham}}</a>
+                            <div class="producttext" >
+                                <a ng-click="product(x)" href="" class="spannote" title="{{x.tenSanPhamS}}" >{{x.tenSanPham}}</a>
                             </div>
                             <div class="protect-money"><p>{{x.gia|number|replaceCommaWithDot}}</p></div>
                             <!-- <div id="masp">{{x.maSanPham}}</div> -->
@@ -169,6 +173,13 @@
                     </div>
                 <!-- </div> -->
                     
+                <div id="CuaSo_SP">
+                    <div id="CuaSo_SP_DIV_IMG">
+
+                    </div>
+
+                </div>
+
             </div>
 <!-- ----------------------------------------------------------------------------------------------------------------- -->
             <div class="productbannermid">
@@ -201,11 +212,11 @@
                                     </span>
                                 </div>
     
-                                <div class="overlayitem-new-2">
+                                <!-- <div class="overlayitem-new-2">
                                     <span class="overlayitemicon-new">
                                         -17%
                                     </span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="productimgsmall-new">
                                     <a class="img1" href="" ><img  src="{{x.anhDaiDien}}" alt=""></a>
@@ -215,12 +226,12 @@
                             </div>
     
                             <div class="producttext-new">
-                                <a href="" class="spannote-new" title="Áo Khoác Dạ Regular Phối sọc AK405 Màu Be" 
+                                <a ng-click="product(x)" class="spannote-new" title="Áo Khoác Dạ Regular Phối sọc AK405 Màu Be" 
                                 style="width: 100%;text-align: center;" ><p class="p-product-new-1" >{{x.tenSanPham}}</p></a>
                             </div>
                             <div class="protect-money-new">
-                                <p style="color: brown; text-align: center;">{{x.gia}}
-                                    <em style="text-decoration:line-through;font-size: 13px;color: black;">35.000</em>
+                                <p style="color: brown; text-align: center;">{{x.gia|number|replaceCommaWithDot}}
+                                    <em style="text-decoration:line-through;font-size: 13px;color: black;"></em>
                                 </p>
                             </div>
                         </div>
@@ -255,7 +266,7 @@
                                     
                             </div>
                             <div class="producttext-selling">
-                                <a href="" class="spannote" title="Áo Khoác Dạ Regular Phối sọc AK405 Màu Be" 
+                                <a  class="spannote" title="Áo Khoác Dạ Regular Phối sọc AK405 Màu Be" 
                                 style="width: 100%;text-align: center;" >Áo Sơ Mi Loose Summner Escape ASM094 Màu Xanh</a>
                             </div>
                             <div class="protect-money-selling"><p style="color: brown; text-align: center;">540.000</p></div>
@@ -467,13 +478,14 @@
       src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
 
-    
+    <script src="./js/trangchu.js"></script>
+    <script src="./angular/global2.js"></script>
     <script src="./angular/angular.min.js"></script>
     <script src="./angular/agl_trangchu.js"></script>
     
 
 
-    <script src="./js/giohang.js"></script>
-    <script src="./js/trangchu.js"></script>
+    
+    
 </body>
 </html>
